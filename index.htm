@@ -2,62 +2,38 @@
 <html lang="">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     <meta charset="utf-8">
-    <!--
-    *************
-
-    После того, как закончу разбираться с  jQM, надо пернести все data-атрибуты в jquery-mobile.htm
-    data-role, data-rel (data-filter, data-transition, data-dom-cache)
-    Закомментировать jQM script, удалить из styles.css 22-jqm-transitions.css и т.д.
-
-    Оставить только совместивые классы и принципы разметки, например
-    <div class="group">
-    <label for="i-01">Text Input:</label>
-    <input type="text" name="textinput" id="i-01" value="">
-    </div>
-
-    *************
-    TODO, extras and alerts — /_construction-set/extended.htm
-    - Test on Android (Samsung Galaxy) and MS Windows Phone (Nokia/HTC)
-    	- Touch-icon for Android
-    - offline.manifest for offline web app
-    - iOS web app
-    - Open Graph basic metadata - www.nb.dev/pro/sales-n-marketing/internet/smm/01-facebook.htm#open_graph
-    - ClearType technology activation in Mobile IE
-    - IE9 pinned sites
-    - Skype buttons disabling
-    - Animated favicon
-    - Modernizr
-    - English NOSCRIPT and Google Frame alert
-    - Schema.org markup for person and company in footer - www.nb.dev/pro/sales-n-marketing/internet/seo/03-rich-snippets-schema-org.htm
-    - jQuery Mobile snippets
-    -->
-
     <title></title>
-    <meta name="description" content="">
+    <meta name="description" content="Книга Владимира Никишина «Роман в SMSках :-*» — история любви в форме переписки. Можно скачать бесплатное издание.">
+
+    <!-- OG Protocol -->
+    <meta property="og:title" content="Drupal var">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="Drupal var, precisely function: if img have not found in .doc-body set to /apple-touch-icon-114x114.png">
+    <meta property="og:url" content="Drupal var">
+    <meta property="og:site_name" content="Сайт PR-агентства «Полилог»">
+    <meta property="og:description" content="Drupal var">
 
     <!-- Mobile -->
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="canonical" href="/">
-    <!--<link rel="stylesheet" href="/a/css/styles.css?120920a">-->
+    <link rel="alternate" href="http://feeds.feedburner.com/polylog/pr" type="application/rss+xml" title="RSS">
+
+    <link rel="canonical" href="http://www.polylog.ru/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.gif" type="image/gif">
+    <!-- <link rel="stylesheet" href="/a/css/styles.css?121220a"> -->
 
     <!-- Development styles. Remove on production -->
     <style type="text/css">
-    .page:hover { background: url(/a/img/_grid-bl20.png) 0 0 repeat-y #FFF; }
-
-    @media only screen and (min-width: 768px) {
-
-    .adjustment { padding-top: 6px; }
-    .page:hover { background: url(/a/img/_grid-bl24.png) 50% 0 repeat-y #FFF; }
-    }
+    .page:hover { background: url(/a/img/_grid-bl22.png) 0 0 repeat-y #FFF; }
     </style>
-    <link rel="stylesheet" href="/a/less/_stock/_extended.less">
     <link rel="stylesheet" href="/a/less/_stock/styles.css">
     <link rel="stylesheet" href="/a/less/_stock/_mediaquery-reporter.css">
-    <!--<link href="/a/less/_stock/_jqm-1.1.css" rel="stylesheet">-->
     <!-- / Development styles. Remove on production -->
+
+    <meta name="author" content="Владимир Никишин, «Полилог» — www.nickysheen.ru">
 
     <!--[if (lt IE 9) & (!IEMobile)]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -65,13 +41,20 @@
     <![endif]-->
 </head>
 
-<body>
+<body class="p-front">
 <!--#include virtual="/_snips/alerts-gl.htm" -->
 
 <!-- Slide out -->
     <nav id="slide-out" class="mob">
     <ul>
-    <li><a href=""></a></li>
+    <li><a href="/">Первая</a></li>
+    <li><a href="/ru/services/">Услуги</a></li>
+    <li><a href="/ru/clients/list.htm">Клиенты</a></li>
+    <li><a href="/ru/case-studies/">Примеры решений</a></li>
+    <li><a href="/ru/company/overview.htm">О компании</a></li>
+    <li><a href="/ru/company/contacts.htm">Контакты</a></li>
+    <li><a href="/ru/pr-blog/">Блог</a></li>
+    <li><a href="/ru/pr-help/">Энциклопедия</a></li>
     </ul>
     </nav>
 
@@ -79,44 +62,94 @@
 <div data-role="page" class="page">
 
 <!-- !HEADER ============================================================= -->
-<!--<header data-role="header" class="doc-header" role="banner">
-    See it in _current
-</header>-->
+<header data-role="header" class="doc-header" role="banner">
+
+    <nav>
+        <hgroup class="cfx">
+    	<h1><a href="/" title="Компания «Полилог». Первая страница">Компания «Полилог» — <abbr title="public relations">PR</abbr> (пиар)</a></h1>
+    	<h2 class="tbl-pc">PR, съезды и выставки, стратегии, корпоративные СМИ</h2>
+        </hgroup>
+
+        <ul class="blc-london-calling tbl-pc">
+        <li><a href="/en/index.htm" class="lang" title="In English">En</a></li>
+        <li><a href="tel:+7-495-777-3993" class="tel"><i class="co"></i>+7 (495) <b>777-39-93</b></a></li>
+        </ul>
+    </nav>
+
+    <nav class="cfx tbl-pc" role="navigation">
+        <!-- Main Menu -->
+        <ul class="nav cfx">
+        <li class="mm-services mm-menu"><a href="/ru/services/" class="mm-label mm-label-4dd"><b class="caret"></b>Услуги</a>
+        <ul class="mm-dropdown">
+        <li><a href="/ru/services/public-relations.htm">Комплексные <abbr title="пиар">PR</abbr>-услуги</a></li>
+        <li><a href="/ru/services/event-management.htm">Организация конференций, выставок, съездов</a></li>
+        <li><a href="/ru/services/corporate-media/">Корпоративные журналы, газеты, интранеты</a></li>
+        <li><a href="/ru/services/gr-government-relations.htm">Политический консалтинг,<br>GR (отношения с органами власти)</a></li>
+        <li><a href="/ru/services/government-authority-consulting.htm">Стратегии, программы развития регионов</a></li>
+        </ul><!-- / dropdown -->
+        </li>
+
+        <li class="mm-clients mm-menu"><a href="/ru/services/" class="mm-label mm-label-4dd"><b class="caret"></b>Клиенты</a>
+        <ul class="mm-dropdown">
+        <li><a href="/ru/case-studies/">Примеры решений</a></li>
+        <li><a href="/ru/clients/list.htm">Список</a></li><!-- Объединить с верхним пунктом под именем /ru/case-studies/ -->
+        <!--<li><a href="/ru/clients/testimonials.htm">Отзывы</a></li>-->
+        </ul><!-- / dropdown -->
+        </li>
+
+        <li class="mm-company mm-menu"><a href="/ru/company/" class="mm-label mm-label-4dd"><b class="caret"></b>Компания</a>
+        <ul class="mm-dropdown">
+        <li><a href="/ru/company/overview.htm">Общие сведения</a></li>
+        <li><a href="/ru/news/">Новости</a></li>
+        <li><a href="/ru/press/">Публикации</a></li>
+        <li><a href="/ru/company/partners.htm">Наши партнёры</a></li>
+        <li><a href="/ru/company/jobs.htm">Вакансии</a></li>
+        <li><a href="/ru/company/contacts.htm">Контактная информация</a></li>
+        </ul><!-- / dropdown -->
+        </li>
+
+        <li class="mm-community mm-menu"><a href="/ru/community/" class="mm-label mm-label-4dd"><b class="caret"></b>Проф. сообщество</a>
+        <ul class="mm-dropdown">
+        <li><a href="/ru/pr-blog/">Блог</a></li>
+        <li><a href="/ru/pr-tutorials/">Мастер-классы / видеоуроки</a></li>
+        <li><a href="/ru/pr-help/">Энциклопедия PR</a></li>
+        </ul><!-- / dropdown -->
+        </li>
+
+        </ul><!--/main menu-->
+
+        <!-- Google Custom Search -->
+        <form action="http://www.polylog.ru/ru/search/" method="get" class="f-search tbl-pc" id="cse-search-box">
+        <input type="hidden" name="cx" value="partner-pub-5600850016351847:1o9bxj-yq3z" />
+        <input type="hidden" name="cof" value="FORID:11" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="search" name="q" class="i-search" data-role="none" placeholder="Поиск" title="Вы ведь что-то собираетесь найти?" required>
+        <button type="submit" data-role="none" class="png">Найти</button>
+        </form>
+        <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=ru"></script>
+    </nav>
+
+    <!--Mobile-->
+        <a href="" class="btn btn-menu mob" data-role="none">Меню</a>
+        <!-- <a href="" class="btn-back mob" data-role="none">Назад</a> -->
+</header>
 
 <!-- !CONTENT ============================================================ -->
 <div class="doc-body" data-role="content">
+    <article class="blc-billboard">
+    </article>
 
-<article class="doc-main">
+    <article class="blc-services">
+    </article>
 
-    <form action="" method="post">
+    <!-- BTL -->
+    <div class="btl cfx">
+        <article class="col blc-clients">
+        </article>
 
-    <!-- Checkbox "Ckeck me out" -->
-    <div class="group with-cbx-rb">
-    <label class="cbx">
-    <input type="checkbox" data-role="none">
-    Check me out
-    </label>
+        <article class="col blc-usp">
+        </article>
     </div>
-
-    <!-- Checkbox "Option one is…" -->
-    <div class="group with-cbx-rb">
-    <label class="cbx"><input type="checkbox" value="" data-role="none">
-    Option one is this and that—be sure to include why it's great. Quick brown fox jumps over the lazy dog</label>
-    </div>
-
-    <!-- Radio buttons -->
-    <fieldset>
-    <legend>Radio buttons</legend>
-    <label class="rb">
-    <input type="radio" name="rb-options" id="rb-options-1" value="option1" checked="">
-    Option one is this and that—be sure to include why it's great</label>
-    <label class="rb">
-    <input type="radio" name="rb-options" id="rb-options-2" value="option2">
-    Option two can is something else and selecting it will deselect option one </label>
-    </fieldset>
-
-    </form>
-</article><!-- / doc-main -->
 
 </div><!-- / doc-body -->
 
