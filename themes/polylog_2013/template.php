@@ -1,100 +1,30 @@
 <?php
 
-/**
- * Override of theme_breadcrumb().
- */
-function polylog_2013_breadcrumb($variables) {
-  $breadcrumb = $variables['breadcrumb'];
+/* ПЕРЕОПРЕДЕЛЯЕМ ИЛИ ДОБАВЛЯЕМ ПЕРЕМЕННЫЕ */
+/* Maintenance.tpl.php */
 
-  if (!empty($breadcrumb)) {
-    // Provide a navigational heading to give context for breadcrumb links to
-    // screen-reader users. Make the heading invisible with .element-invisible.
-    $output = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
-
-    $output .= '<div class="breadcrumb">' . implode(' › ', $breadcrumb) . '</div>';
-    return $output;
-  }
-}
-
-/**
- * Override or insert variables into the maintenance page template.
- */
 function polylog_2013_preprocess_maintenance_page(&$vars) {
-  // While markup for normal pages is split into page.tpl.php and html.tpl.php,
-  // the markup for the maintenance page is all in the single
-  // maintenance-page.tpl.php template. So, to have what's done in
-  // polylog_2013_preprocess_html() also happen on the maintenance page, it has to be
-  // called here.
+  // Переносим переменные из шаблона html
   polylog_2013_preprocess_html($vars);
 }
 
-/**
- * Override or insert variables into the html template.
- */
+/* html.tpl.php */
 function polylog_2013_preprocess_html(&$vars) {
-  // Toggle fixed or fluid width.
-  if (theme_get_setting('polylog_2013_width') == 'fluid') {
-    $vars['classes_array'][] = 'fluid-width';
-  }
-  // Add conditional CSS for IE6.
-  drupal_add_css(path_to_theme() . '/fix-ie.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lt IE 7', '!IE' => FALSE), 'preprocess' => FALSE));
+	$path = drupal_get_path_alias($_GET['q']);
+	$aliases = explode('/', $path);
+	
+	foreach($aliases as $alias) {
+		$vars['classes_array'][] = drupal_clean_css_identifier($alias);
+	} 
 }
 
-/**
- * Override or insert variables into the html template.
- */
 function polylog_2013_process_html(&$vars) {
-  // Hook into color.module
-  if (module_exists('color')) {
-    _color_html_alter($vars);
-  }
 }
 
-/**
- * Override or insert variables into the page template.
- */
+
+/* page.tpl.php */
 function polylog_2013_preprocess_page(&$vars) {
-  // Move secondary tabs into a separate variable.
-  $vars['tabs2'] = array(
-    '#theme' => 'menu_local_tasks',
-    '#secondary' => $vars['tabs']['#secondary'],
-  );
-  unset($vars['tabs']['#secondary']);
-
-  if (isset($vars['main_menu'])) {
-    $vars['primary_nav'] = theme('links__system_main_menu', array(
-      'links' => $vars['main_menu'],
-      'attributes' => array(
-        'class' => array('links', 'inline', 'main-menu'),
-      ),
-      'heading' => array(
-        'text' => t('Main menu'),
-        'level' => 'h2',
-        'class' => array('element-invisible'),
-      )
-    ));
-  }
-  else {
-    $vars['primary_nav'] = FALSE;
-  }
-  if (isset($vars['secondary_menu'])) {
-    $vars['secondary_nav'] = theme('links__system_secondary_menu', array(
-      'links' => $vars['secondary_menu'],
-      'attributes' => array(
-        'class' => array('links', 'inline', 'secondary-menu'),
-      ),
-      'heading' => array(
-        'text' => t('Secondary menu'),
-        'level' => 'h2',
-        'class' => array('element-invisible'),
-      )
-    ));
-  }
-  else {
-    $vars['secondary_nav'] = FALSE;
-  }
-
-  // Prepare header.
+  // «Шапка»
   $site_fields = array();
   if (!empty($vars['site_name'])) {
     $site_fields[] = $vars['site_name'];
