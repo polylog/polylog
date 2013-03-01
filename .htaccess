@@ -343,13 +343,57 @@ FileETag None
 # ----------------------------------------------------------------------
 # Redirects
 # ----------------------------------------------------------------------
+  RewriteEngine on
 
 #Directories redirect
-	#RewriteRule ^oldfolder/(.*) http://www.polylog.ru/newfolder/$1 [L,R=301]
-	#Redirect 301 /projects/clientsite/ http://www.client-polylog.ru/
+  RewriteRule ^ru/marketing-communications-community/blog-pr-btl/(.*) http://www.polylog.ru/ru/pr-blog/$1 [R=301,L]
+  RewriteRule ^ru/marketing-communications-community/pr-btl-help/(.*) http://www.polylog.ru/ru/pr-help/$1 [R=301,L]
+  RewriteRule ^en/marketing-communications-community/pr-btl-help/(.*) http://www.polylog.ru/en/pr-help/$1 [R=301,L]
+  RewriteRule ^ru/btl-public-relations-firm/news/(.*) http://www.polylog.ru/ru/news/$1 [R=301,L]
+  RewriteRule ^en/btl-public-relations-firm/news/(.*) http://www.polylog.ru/en/news/$1 [R=301,L]
+  RewriteRule ^ru/btl-public-relations-firm/press/(.*) http://www.polylog.ru/ru/press/$1 [R=301,L]
+  RewriteRule ^ru/btl-public-relations-firm/jobs/(.*) http://www.polylog.ru/ru/company/jobs.htm [R=301,L]
+  RewriteRule ^ru/btl-pr-clients/public-relations-case-studies/(.*) http://www.polylog.ru/ru/case-studies/$1 [R=301,L]
+  RewriteRule ^en/btl-pr-clients/public-relations-case-studies/(.*) http://www.polylog.ru/en/case-studies/$1 [R=301,L]
+  RewriteRule ^en/marketing-communications-pr-btl/company-magazines-brochures-newsletters/(.*) http://www.polylog.ru/en/services/corporate-media/$1 [R=301,L]
+  RewriteRule ^ru/marketing-communications-pr-btl/company-magazines-brochures-newsletters/(.*) http://www.polylog.ru/ru/services/corporate-media/$1 [R=301,L]
+  RewriteRule ^ru/pr/video/(.*) http://www.polylog.ru/ru/pr-video/$1 [R=301,L]
+  RewriteRule ^ru/marketing-communications-community/tutorials-pr/(.*) http://www.polylog.ru/ru/pr-tutorials/$1 [R=301,L]
+  RewriteRule ^en/btl-public-relations-firm/(.*) http://www.polylog.ru/en/company/$1 [R=301,L]
+  RewriteRule ^ru/btl-public-relations-firm/(.*) http://www.polylog.ru/ru/company/$1 [R=301,L]
+
+  RewriteRule ^ru/comment/(.*) http://www.polylog.ru/ru/pr-blog/$1 [R=301,L]
+
+  RewriteRule ^sites/v3/a/upload/(.*) http://www.polylog.ru/a/upload/$1 [R=301,L]
+  RewriteRule ^sites/v3/a/img/blog/(.*) http://www.polylog.ru/a/img/blog/$1 [R=301,L]
 
 #Pages redirect
-	#RewriteRule ^old-folder/old-file.htm$ http://www.polylog.ru/new-folder/new-file.htm [R=301,L]
+  RewriteRule ^main.php$ http://www.polylog.ru/ [R=301,L]
+  RewriteRule ^ru/marketing-communications-community$ http://www.polylog.ru/ru/community/ [R=301,L]
+  RewriteRule ^ru/marketing-communications-community$ http://www.polylog.ru/ru/community/ [R=301,L]
+  RewriteRule ^ru/marketing-communications-community/$ http://www.polylog.ru/ru/community/ [R=301,L]
+  RewriteRule ^ru/marketing-communications-community/index.htm$ http://www.polylog.ru/ru/community/ [R=301,L]
+  RewriteRule ^en/marketing-communications-pr-btl/index.htm$ http://www.polylog.ru/en/services/index.htm [R=301,L]
+  RewriteRule ^ru/marketing-communications-pr-btl/index.htm$ http://www.polylog.ru/ru/services/index.htm [R=301,L]
+  RewriteRule ^en/marketing-communications-pr-btl/integrated-public-relations-campaigns.htm$ http://www.polylog.ru/en/services/public-relations.htm [R=301,L]
+  RewriteRule ^ru/marketing-communications-pr-btl/integrated-public-relations-campaigns.htm$ http://www.polylog.ru/ru/services/public-relations.htm [R=301,L]
+  RewriteRule ^en/marketing-communications-pr-btl/government-authority-consulting.htm$ http://www.polylog.ru/en/services/government-authority-consulting.htm [R=301,L]
+  RewriteRule ^ru/marketing-communications-pr-btl/government-authority-consulting.htm$ http://www.polylog.ru/ru/services/government-authority-consulting.htm [R=301,L]
+  RewriteRule ^en/marketing-communications-pr-btl/gr-government-relations.htm$ http://www.polylog.ru/en/services/gr-government-relations.htm [R=301,L]
+  RewriteRule ^ru/marketing-communications-pr-btl/gr-government-relations.htm$ http://www.polylog.ru/ru/services/gr-government-relations.htm [R=301,L]
+  RewriteRule ^en/marketing-communications-pr-btl/public-relations-event-planning.htm$ http://www.polylog.ru/en/services/event-management.htm [R=301,L]
+  RewriteRule ^ru/marketing-communications-pr-btl/public-relations-event-planning.htm$ http://www.polylog.ru/ru/services/event-management.htm [R=301,L]
+  RewriteRule ^ru/services/government-authority-consulting.htm$ http://www.polylog.ru/ru/services/regional-development.htm [R=301,L]
+  RewriteRule ^en/services/government-authority-consulting.htm$ http://www.polylog.ru/en/services/regional-development.htm [R=301,L]
+
+  RewriteRule ^en/btl-pr-clients/index.htm$ http://www.polylog.ru/en/clients/index.htm [R=301,L]
+  RewriteRule ^ru/btl-pr-clients/index.htm$ http://www.polylog.ru/ru/clients/index.htm [R=301,L]
+  RewriteRule ^en/btl-pr-clients/list.htm$ http://www.polylog.ru/en/clients/list.htm [R=301,L]
+  RewriteRule ^ru/btl-pr-clients/list.htm$ http://www.polylog.ru/ru/clients/list.htm [R=301,L]
+
+  RewriteRule ^ru/rss/blog.rss$ http://feeds.feedburner.com/polylog/pr [R=301,L]
+  RewriteRule ^ru/pr-blog/feed http://feeds.feedburner.com/polylog/pr [R=301,L]
+  RewriteRule ^ru/rss/united.rss$ http://feeds.feedburner.com/polylog/pr [R=301,L]
 
 # Temporary redirects
 	#Redirect 302 /news/2010/index.htm http://www.polylog.ru/news/index.htm

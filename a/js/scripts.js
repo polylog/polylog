@@ -11,15 +11,11 @@
     }
 }());
 
-// http://addyosmani.github.com/jquery-ui-bootstrap/
 
-// STICKY MENUS
+// TODO - STICKY MENUS
 // http://www.jay-han.com/2011/11/10/simple-smart-sticky-navigation-bar-with-jquery/
 // http://webdesign.tutsplus.com/tutorials/javascript-tutorials/create-a-sticky-navigation-header-using-jquery-waypoints/
 // http://codecanyon.net/item/jquery-css3-sticky-mega-menu-bar/239093
-
-// jQuery FlexSlider v1.8
-// http://www.woothemes.com/flexslider/
 
 // DROPDOWNS
 function dropDowns() {
@@ -53,6 +49,7 @@ function dropDowns() {
     });
 }
 
+// TODO - add swipe event with hammer.js
 // SLIDE-OUT MENU. Modified version of snippet by Aldo Lugo — https://github.com/aldomatic/FB-Style-Page-Slide-Menu
 $(function slideOut() {
     var menuStatus;
@@ -89,22 +86,194 @@ $(function slideOut() {
     });
 });
 
+// TODO - combine with Title utilizier(), refactoring
 // TOOLTIP
 function toolTip() {
-    if(window.matchMedia('(min-width: 769px)').matches) {
-        $('.dfn').hover(
+    $('.dfn').hover(
+    function () {
+        $(this).siblings('.tooltip').show('fast');
+    }, function () {
+        $(this).siblings('.tooltip').hide('fast');
+    });
+}
 
-        function() {
-            var txtTitle = $(this).prop("title");
-            $(this).after('<p class="tooltip">' + txtTitle + '</p>');
-            $(this).siblings('.tooltip').show('fast');
-            $(this).data('title', $(this).prop('title'));
-            $(this).removeAttr('title');
-        }, function() {
-            $('.tooltip').hide('fast').remove();
-            $(this).prop('title', $(this).data('title'));
+// Title utilizier
+// function toolTip() {
+//     if(window.matchMedia('(min-width: 769px)').matches) {
+//         $('.dfn').hover(
+//         function() {
+//             var txtTitle = $(this).prop("title");
+//             $(this).after('<p class="tooltip">' + txtTitle + '</p>');
+
+//             $(this).siblings('.tooltip').show('fast'); //common
+//             $(this).data('title', $(this).prop('title'));
+//             $(this).removeAttr('title');
+//         }, function() {
+//             $('.tooltip').hide('fast').remove(); //non-commom
+//             $(this).prop('title', $(this).data('title'));
+//         });
+//     }
+// }
+
+
+// Rotator
+(function($) {
+    $.fn.extend({
+        //plugin name - rotaterator
+        rotaterator: function(options) {
+
+            var defaults = {
+                fadeSpeed: 600,
+                pauseSpeed: 100,
+                child: null
+            };
+
+            var options = $.extend(defaults, options);
+
+            return this.each(function() {
+                var o = options;
+                var obj = $(this);
+                var items = $(obj.children(), obj);
+                var next;
+                items.each(function() {
+                    $(this).hide();
+                });
+                if(!o.child) {
+                    next = $(obj).children(':first');
+                } else {
+                    next = o.child;
+                }
+                $(next).fadeIn(o.fadeSpeed, function() {
+                    $(next).delay(o.pauseSpeed).fadeOut(o.fadeSpeed, function() {
+                        var next = $(this).next();
+                        if(next.length === 0) {
+                            next = $(obj).children(':first');
+                        }
+                        $(obj).rotaterator({
+                            child: next,
+                            fadeSpeed: o.fadeSpeed,
+                            pauseSpeed: o.pauseSpeed
+                        });
+                    });
+                });
+            });
+        }
+    });
+})(jQuery);
+
+// TODO - it doesn't work, fix it
+function mobileHeaderImg() {
+    $(window).bind('scroll', function(){
+        $('.blc-usp h2:after, .blc-usp h2 .after').toggle($(this).scrollTop() > 200);
+    });
+}
+
+// TODO - combine with galeryOld(), refactoring
+function gallery() {
+    $('a[data-role="gallerycontrol"], a[data-widget="gallery"], a[rel*="gallery"]').click(function (e) {
+        //Cancel the link behavior
+        e.preventDefault();
+        var href = $(this).attr('href');
+        var title;
+        //Create figcaption text
+        if ($(this).attr('title') && $('figure.gallery p')[0]) {
+            title = $(this).attr('title');
+        } else {
+            title = '';
+        }
+        var figure = $('figure.gallery');
+        var img = $('figure.gallery img');
+        var figcaption = $('figure.gallery p');
+        img.remove();
+        figcaption.empty();
+        figure.append('<img src="' + href + '" alt="' + title + '" />');
+        figcaption.append(title);
+    });
+}
+
+function galeryOld() {
+    $('a.loadinto-gallery').click(function (e) {
+        //Cancel the link behavior
+        e.preventDefault();
+        var href = $(this).attr('href');
+        //Load HTML in gallery frame
+        $('#gallery').load(href);
+    });
+}
+
+// TODO - combine with modalBoxOld(), refactoring
+function modalBox() {
+    $('a[data-role="modal-launcher"], a[rel*="extra"]').click(function (e) {
+        //Cancel the link behavior
+        e.preventDefault();
+        var title;
+        //Create modal box container and overlay
+        if ($('#modal_box').length === 0) {
+            $('body').append('<div id="modal_box" class="section"></div><div id="overlay" style="filter: alpha(opacity=64)"></div>');
+        }
+        var href = $(this).attr('href');
+        //Create figcaption text
+        if ($(this).attr('title')) {
+            title = $(this).attr('title');
+        } else {
+            title = ':-)';
+        }
+        //Check href to separate html and pics
+        if ($(this).is('a[href$=.png], a[href$=.jpg], a[href$=.gif], a[href$=.gif]')) {
+            //Create figure, figcaption and open image in modal box
+            $('#modal_box').append('<div class="single figure"><div class="figcaption">' + title + '<button class="close">Закрыть</button></div><img src="' + href + '" alt="" /></div><div class="footer"></div>');
+            $.getScript('/a/js/modal-box.js');
+            $('#modal_box').fadeIn('300');
+            $('#overlay').fadeIn('300');
+        } else {
+            //Load HTML in modal box
+            $('#modal_box').load(href, function () {
+                $.getScript('/a/js/modal-box.js');
+            });
+            $('#modal_box').fadeIn('300');
+            $('#overlay').fadeIn('300');
+        }
+        $(document).keydown(function (e) {
+            if (e.keyCode == 27) {
+                $('#modal_box').fadeOut('fast');
+                $('#overlay').fadeOut('fast');
+                $('#modal_box').empty();
+            }
         });
-    }
+    });
+}
+
+function modalBoxOld() {
+    $('a.loadinto-modal_box').click(function (e) {
+        //Cancel the link behavior
+        e.preventDefault();
+        //Create modal box container and overlay
+        if ($('#modal_box').length === 0) {
+            $('body').append('<div id="modal_box" class="section"></div><div id="overlay" style="filter: alpha(opacity=64)"></div>');
+        }
+        var href = $(this).attr('href');
+        $('#modal_box').load(href, function () {
+            $.getScript('/a/js/modal-box.js');
+        });
+        $('#modal_box').fadeIn('300');
+        $('#overlay').fadeIn('300');
+        //Close modal box on escape key press
+        $(document).keydown(function (e) {
+            if (e.keyCode == 27) {
+                $('#modal_box').fadeOut('fast');
+                $('#overlay').fadeOut('fast');
+                $('#modal_box').empty();
+            }
+        });
+    });
+}
+
+function collapsibles() {
+    //$('.first_opened div.first').show();
+    $('.on_demand H3').click(function(event) {
+        $(this).next('div').slideToggle();
+        $(this).toggleClass('opened');
+    });
 }
 
 $(document).ready(function(){
@@ -112,16 +281,15 @@ $(document).ready(function(){
     $('ol, ul').prev('p').css('margin-bottom', '0'); //lists captions
     dropDowns();
     toolTip();
+    $('.rotator').rotaterator({fadeSpeed:1200, pauseSpeed:8000});
     slideOut();
+    // mobileHeaderImg();
 
-     $(".slideshow").slides({
-        container: 'reel',
-        slideSpeed: 440,
-        pagination: false,
-        effect: 'slide, fade',
-        hoverPause: true
-    });
-
+    collapsibles();
+    modalBox();
+    gallery();
+    modalBoxOld();
+    galeryOld();
 });
 
 function noError() {

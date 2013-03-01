@@ -1,34 +1,23 @@
+#
+# robots.txt
+#
+# This file is to prevent the crawling and indexing of certain parts
+# of your site by web crawlers and spiders run by sites like Yahoo!
+# and Google. By telling these "robots" where not to go on your site,
+# you save bandwidth and server resources.
+#
+# This file will be ignored unless it is at the root of your host:
+# Used:    http://example.com/robots.txt
+# Ignored: http://example.com/site/robots.txt
+#
+# For more information about the robots.txt standard, see:
+# http://www.robotstxt.org/wc/robots.html
+#
+# For syntax checking, see:
+# http://www.sxw.org.uk/computing/robots/check.html
+
 User-agent: *
-Sitemap: http://www.polylog.ru/sitemap.xml
-# Sitemap: http://www.polylog.ru/en/sitemap.xml
-
 Crawl-delay: 10
-
-# URLs with parameters
-Disallow: /*?
-
-# Directories
-Disallow: /.git/
-Disallow: /_snips/
-Disallow: /_stock/
-Disallow: /_tmp/
-
-# Files
-Disallow: /.gitignore
-Disallow: /BingSiteAuth.xml
-Disallow: /.nojekyll
-Disallow: /CNAME
-Disallow: *.DS_Store
-Disallow: /google*.html
-Disallow: /maintenance.htm
-Disallow: *.sublime-project
-Disallow: *.sublime-workspace
-Disallow: /yandex*.html
-
-
-
-# Drupal
-
 # Directories
 Disallow: /includes/
 Disallow: /misc/
@@ -36,16 +25,19 @@ Disallow: /modules/
 Disallow: /profiles/
 Disallow: /scripts/
 Disallow: /themes/
-Disallow: /stat/
-
 # Files
+Disallow: /CHANGELOG.txt
 Disallow: /cron.php
+Disallow: /INSTALL.mysql.txt
+Disallow: /INSTALL.pgsql.txt
+Disallow: /INSTALL.sqlite.txt
 Disallow: /install.php
 Disallow: /INSTALL.txt
+Disallow: /LICENSE.txt
+Disallow: /MAINTAINERS.txt
 Disallow: /update.php
 Disallow: /UPGRADE.txt
 Disallow: /xmlrpc.php
-
 # Paths (clean URLs)
 Disallow: /admin/
 Disallow: /comment/reply/
@@ -56,7 +48,6 @@ Disallow: /user/register/
 Disallow: /user/password/
 Disallow: /user/login/
 Disallow: /user/logout/
-
 # Paths (no clean URLs)
 Disallow: /?q=admin/
 Disallow: /?q=comment/reply/
@@ -67,9 +58,3 @@ Disallow: /?q=user/password/
 Disallow: /?q=user/register/
 Disallow: /?q=user/login/
 Disallow: /?q=user/logout/
-
-# Patterns
-# To match a sequence of characters, use an asterisk (*). For instance,
-# Disallow: /private* — block any URLs starting with private
-# To specify matching the end of a URL, use $.
-# Disallow: /*.xls$
