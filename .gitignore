@@ -68,4 +68,7 @@ xmlrpc.php
 # Exlude all themes exept original
 themes/*
 !themes/polylog_2013
+themes/polylog_2013/_preprocess.php
+themes/polylog_2013/templates/_tmp-zen
+
 
