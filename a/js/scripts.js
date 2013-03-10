@@ -164,7 +164,7 @@ function toolTip() {
 // TODO - it doesn't work, fix it
 function mobileHeaderImg() {
     $(window).bind('scroll', function(){
-        $('.blc-usp h2:after, .blc-usp h2 .after').toggle($(this).scrollTop() > 200);
+        $('.sec-usp h2:after, .sec-usp h2 .after').toggle($(this).scrollTop() > 200);
     });
 }
 

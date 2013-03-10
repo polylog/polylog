@@ -1,14 +1,20 @@
 <?php
 /*
-	ПЕРЕМЕННЫЕ
-	Могут использоваться любые переменные, передаваемые в html.tpl.php и page.tpl.php.
-	Но я не вижу в этом смысла. Страничку можно украсить: например, разводным ключом и
-	ногами автослесаря, валяющегося под днищем. См. также
-	http://www.smashingmagazine.com/2009/06/12/effective-maintenance-pages-examples-and-best-practices/
-	
-	«РОДИТЕЛЬСКИЕ» ФУНКЦИИ
-	@see template_preprocess() — includes/theme.inc
-	@see template_preprocess_maintenance_page() — includes/theme.maintenance.inc
+|
+|--------------------------------------------------------------------------
+| ПЕРЕМЕННЫЕ
+|--------------------------------------------------------------------------
+| Могут использоваться любые переменные, передаваемые в html.tpl.php и page.tpl.php.
+| Но я не вижу в этом смысла. Страничку можно украсить: например, разводным ключом и
+| ногами автослесаря, валяющегося под днищем. См. также
+| http://www.smashingmagazine.com/2009/06/12/effective-maintenance-pages-examples-and-best-practices/
+| 
+|--------------------------------------------------------------------------
+| «РОДИТЕЛЬСКИЕ» ФУНКЦИИ
+|--------------------------------------------------------------------------
+| @see template_preprocess() — includes/theme.inc
+| @see template_preprocess_maintenance_page() — includes/theme.maintenance.inc
+|
 */
 ?>
 <!DOCTYPE html>
@@ -45,18 +51,18 @@
 </head>
 <body>
 
-    <header>NewSite.com</header>
-    
-    <article>
+<header>NewSite.com</header>
+
+<article>
     <h1>Извините, сайт polylog.ru закрыт на техобслуживание</h1>
     <p>Возвращайтесь через час — будем ждать.</p>
-    </article>
-    
-    <article>
+</article>
+
+<article>
     <h1>Polylog.ru is currently down for maintenance</h1>
     <p>We're working improving the NewSite.com.<br>
     Don't worry, well be right back.</p>
-    </article>
+</article>
 
 </body>
 </html>

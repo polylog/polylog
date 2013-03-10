@@ -36,6 +36,7 @@ cache/
 files/
 sites/*/files
 sites/*/private
+_tmp/
 
 # Ignore default text files
 .htaccess

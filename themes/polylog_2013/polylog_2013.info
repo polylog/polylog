@@ -1,24 +1,24 @@
-name        								= Polylog 2013
-description 								= Drupal theme created for Polylog PR in 2013.
-version 									= 1.0
-core 										= 7.x
-engine 										= phptemplate
-screenshot 									= screenshot.png
+name                                        = Polylog 2013
+description                                 = Drupal theme created for Polylog PR in 2013.
+version                                     = 1.0
+core                                        = 7.x
+engine                                      = phptemplate
+screenshot                                  = screenshot.png
 
-regions[content]							= Основное содержание
-regions[sidebar]							= Правая колонка
-regions[frontpage_content]					= Содержание первой страницы
-regions[teaser_news]						= Анонс последней новости в подвале
-regions[teaser_news_company]				= Анонсы последних новостей на титульной странице раздела «Компания»
+regions[content]                            = Основное содержание
+regions[sidebar]                            = Правая колонка
+regions[frontpage_content]                  = Содержание первой страницы
+regions[teaser_news]                        = Анонс последней новости в подвале
+regions[teaser_news_company]                = Анонсы последних новостей на титульной странице раздела «Компания»
 
-regions[teaser_blog]						= Анонс последней заметки блога
-regions[teasers_blog_community]				= Анонсы последних заметок блога на титульной странице раздела «Проф. сообщество»
-regions[blog_roll_vip]						= Сквозные ссылки на партнёров
-regions[blog_roll]							= Ссылки на партнёров только с первой страницы блога
-regions[similar]							= Ссылки на похожие материалы
+regions[teaser_blog]                        = Анонс последней заметки блога
+regions[teasers_blog_community]             = Анонсы последних заметок блога на титульной странице раздела «Проф. сообщество»
+regions[blog_roll_vip]                      = Сквозные ссылки на партнёров
+regions[blog_roll]                          = Ссылки на партнёров только с первой страницы блога
+regions[similar]                            = Ссылки на похожие материалы
 
 
-features[] 									= name
-features[] 									= slogan
-features[] 									= main_menu
-features[] 									= secondary_menu
+features[]                                  = name
+features[]                                  = slogan
+features[]                                  = main_menu
+features[]                                  = secondary_menu
