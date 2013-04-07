@@ -1,39 +1,46 @@
 <?php
-/**
- * @file
- * Zen theme's implementation to display a node.
- *
- * Available variables:
- * - $title: the (sanitized) title of the node.
- * - $content: An array of node items. Use render($content) to print them all,
- *   or print a subset such as render($content['field_example']). Use
- *   hide($content['field_example']) to temporarily suppress the printing of a
- *   given element.
- * - $user_picture: The node author's picture from user-picture.tpl.php.
- * - $date: Formatted creation date. Preprocess functions can reformat it by
- *   calling format_date() with the desired parameters on the $created variable.
- * - $name: Themed username of node author output from theme_username().
- * - $node_url: Direct url of the current node.
- * - $display_submitted: Whether submission information should be displayed.
- * - $submitted: Submission information created from $name and $date during
- *   template_preprocess_node().
- * - $classes: String of classes that can be used to style contextually through
- *   CSS. It can be manipulated through the variable $classes_array from
- *   preprocess functions. The default values can be one or more of the
- *   following:
- *   - node: The current template type, i.e., "theming hook".
- *   - node-[type]: The current node type. For example, if the node is a
- *     "Blog entry" it would result in "node-blog". Note that the machine
- *     name will often be in a short form of the human readable label.
- *   - node-teaser: Nodes in teaser form.
- *   - node-preview: Nodes in preview mode.
- *   - view-mode-[mode]: The view mode, e.g. 'full', 'teaser'...
- *   The following are controlled through the node publishing options.
- *   - node-promoted: Nodes promoted to the front page.
- *   - node-sticky: Nodes ordered above other non-sticky nodes in teaser
- *     listings.
- *   - node-unpublished: Unpublished nodes visible only to administrators.
- *   The following applies only to viewers who are registered users:
+/*
+|
+|-------------------------------------------------------------------------------
+| ПЕРЕМЕННЫЕ и ФУНКЦИИ
+|-------------------------------------------------------------------------------
+|
+| Переменные примитивных типов данных включаются в шаблон только через конструкцию print
+| <?php print $variable; ?>
+| переменные-массивы — еще и через функциюю render()
+| <?php print render($tabs); ?>
+|
+| - $content - Массив элементов содержания. Команда для вывода всего содержания —
+|   render($content). Для отдельного элемента — render($content['field_example']).
+|   Чтобы не выводить тот или иной элемент - hide($content['field_example'])
+| - $is_front - TRUE, если данная страница первая.
+| - $title - Основной заголовок в разделе <body>.
+| - $node_url - URL старницы
+| - format_date() - дата в нужном вормате. Например, format_date($node->created, 'custom', 'd');
+|
+|-------------------------------------------------------------------------------
+| НЕ ИСПОЛЬЗУЮ
+|-------------------------------------------------------------------------------
+|
+| - $submitted - Информация об авторстве и дате публикации согласно template_preprocess_node().
+| - $display_submitted - Выводить ли информацию об авторстве и дате публикации.
+| - $user_picture - Портрет автора по шаблону user-picture.tpl.php.
+| - $date - Дата публикации.
+| - $name — Имя пользователя автора согласно theme_username().
+| - $classes — Контекстно-зависимая строка классов элемента <body>. Наиболее
+|   полезный класс по умолчанию .node-[node type]. Другие классы: front,
+|   node-teaser, view-mode-[mode] ('full' или 'teaser')… Можно добавить классы через
+|   template.php — http://stackoverflow.com/questions/7700838/adding-a-class-to-body/7700886#7700886
+| - $title_prefix - Массив дополнительной разметки, которые различные модули
+|   могут выводить до основного заголовка в разделе <body>.
+| - $title_suffix - Массив дополнительной разметки, которые различные модули
+|   могут выводить после основного заголовка в разделе <body>.
+|   <?php print render($title_prefix); ?>
+|   <?php if ($title): ?>
+|   <h1><?php print $title; ?></h1>
+|   <?php endif; ?>
+|   <?php print render($title_suffix); ?>
+
  *   - node-by-viewer: Node is authored by the user currently viewing the page.
  * - $title_prefix (array): An array containing additional output populated by
  *   modules, intended to be displayed in front of the main title tag that
@@ -64,7 +71,6 @@
  * - $comment: State of comment settings for the node.
  * - $readmore: Flags true if the teaser content of the node cannot hold the
  *   main body content. Currently broken; see http://drupal.org/node/823380
- * - $is_front: Flags true when presented in the front page.
  * - $logged_in: Flags true when the current user is a logged-in member.
  * - $is_admin: Flags true when the current user is an administrator.
  *
@@ -74,6 +80,77 @@
  * variables. Otherwise they will have to explicitly specify the desired field
  * language, e.g. $node->body['en'], thus overriding any language negotiation
  * rule that was previously applied.
+|
+|
+|-------------------------------------------------------------------------------
+| «РОДИТЕЛЬСКИЕ» ФУНКЦИИ (@see includes/theme.inc и modules/system/html.tpl.php)
+|-------------------------------------------------------------------------------
+|
+|
+|
+|-------------------------------------------------------------------------------
+| CHEATSHEET
+|-------------------------------------------------------------------------------
+|
+| Стнадарты кодирования:
+| http://drupal.org/coding-standards
+| http://drupal.org/node/1354
+| http://ellislab.com/codeigniter/user-guide/general/styleguide.html
+|
+| <?php if($this->value): ?>
+| …В целях удобочитаемости в php-шаблонах используется альтернативный синтаксиса
+| контрольных конструкций if () : … elseif(): …
+| <?php elseif($this->asd): ?>
+| …легче читаемый в HTML
+| <?php else: ?>
+| …HTML…
+| <?php else: ?>
+| …HTML…
+| <?php endif; ?>
+|
+| <article<?php if ($page == 0): print ' class="tsr"'; elseif ($sticky): print ' class="tsr sticky"'; endif ?>>
+|
+| Стандарт Drupal: elseif, а не else if
+|
+| <?php if ($node->type == 'frontpage') { ?>
+| …Универсальный синтаксис if () {}…
+| <?php } elseif ($t<"20") { ?>
+| …не используется…
+| <?php } else { ?>
+| …HTML…
+| <?php } ?>
+|
+| switch ($favcolor) {
+| case 'red':
+| case 'black':
+|   print 'Your favorite color are red or black';
+|   break;
+| case 'blue':
+|   return 'Your favorite color is blue!';
+| default:
+|   print 'Your favorite color is neither red, blue, or green!';
+|   // There is no need in break for default
+| }
+|
+| $array_name = array('item1', 24, $some_var);
+| if (in_array('string or variable',$array_name) or !in_array()
+|
+| <meta property="og:type" content="<?php ($node->type == 'frontpage') ? print 'website' : print 'article'; ?>">
+|
+| <?php require_once("ru/_inc/menu.inc"); ?>
+|
+| if (preg_match('^/en/company(.*)', $v3_path)):
+|
+| http://www.w3schools.com/php/
+| http://www.phpf1.com/tutorial/php-regular-expression.html
+| http://drupal.org/node/190815
+| http://drupal.org/node/1089656
+|
+*/
+
+/**
+ * Available variables:
+ *
  *
  * @see template_preprocess()
  * @see template_preprocess_node()
@@ -83,35 +160,34 @@
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-  <?php print $user_picture; ?>
 
-  <?php print render($title_prefix); ?>
-  <?php if (!$page && $title): ?>
-    <h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
-  <?php endif; ?>
-  <?php print render($title_suffix); ?>
+<?php print render($title_prefix); ?>
+<?php if (!$page && $title): ?>
+<h2<?php print $title_attributes; ?>><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
+<?php endif; ?>
+<?php print render($title_suffix); ?>
 
-  <?php if ($unpublished): ?>
-    <div class="unpublished"><?php print t('Unpublished'); ?></div>
-  <?php endif; ?>
+<?php if ($unpublished): ?>
+<div class="unpublished"><?php print t('Unpublished'); ?></div>
+<?php endif; ?>
 
-  <?php if ($display_submitted): ?>
-    <div class="submitted">
-      <?php print $submitted; ?>
-    </div>
-  <?php endif; ?>
+<?php if ($display_submitted): ?>
+<div class="submitted">
+  <?php print $submitted; ?>
+</div>
+<?php endif; ?>
 
-  <div class="content"<?php print $content_attributes; ?>>
-    <?php
-      // We hide the comments and links now so that we can render them later.
-      hide($content['comments']);
-      hide($content['links']);
-      print render($content);
-    ?>
-  </div>
+<div class="content"<?php print $content_attributes; ?>>
+<?php
+  // We hide the comments and links now so that we can render them later.
+  hide($content['comments']);
+  hide($content['links']);
+  print render($content);
+?>
+</div>
 
-  <?php print render($content['links']); ?>
+<?php print render($content['links']); ?>
 
-  <?php print render($content['comments']); ?>
+<?php print render($content['comments']); ?>
 
 </div><!-- /.node -->

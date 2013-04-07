@@ -1,17 +1,17 @@
 <?php
 /*
 |
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | ПЕРЕМЕННЫЕ
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | Могут использоваться любые переменные, передаваемые в html.tpl.php и page.tpl.php.
 | Но я не вижу в этом смысла. Страничку можно украсить: например, разводным ключом и
 | ногами автослесаря, валяющегося под днищем. См. также
 | http://www.smashingmagazine.com/2009/06/12/effective-maintenance-pages-examples-and-best-practices/
-| 
-|--------------------------------------------------------------------------
+|
+|-------------------------------------------------------------------------------
 | «РОДИТЕЛЬСКИЕ» ФУНКЦИИ
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | @see template_preprocess() — includes/theme.inc
 | @see template_preprocess_maintenance_page() — includes/theme.maintenance.inc
 |
@@ -33,11 +33,11 @@
     <link rel="shortcut icon" href="/favicon.gif" type="image/gif">
 
     <meta name="author" content="Владимир Никишин, «Полилог» — www.nickysheen.ru">
-    
+
     <style type="text/css">
 	HTML { background: #E3E6EA}
 	BODY { background: #FFF; border-radius: 20px; -moz-border-radius: 20px; -webkit-border-radius: 20px; box-shadow: 4px 3px 1px #000; -moz-box-shadow: 0px 1px 2px #B8BBBF; -webkit-box-shadow: 4px 3px 0 #000; color: #535659; font: 81.3%/1.54 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif; text-align: center; margin: 60px auto 0; padding: 40px 40px 34px; width: 440px}
-	
+
 	HEADER { background: url(/a/img/base-graphics.png) no-repeat -60px 0; display: block; text-indent: -4000em; margin: 0 auto; height: 33px; width: 132px}
 	ARTICLE:first-of-type { display: block; padding-bottom: 1.154em}
 	H1 { font-size: 261.5%; font-weight: 300; letter-spacing: -.03em; line-height: 1.18; margin: 0; padding: .324em 0 .412em}

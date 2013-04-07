@@ -1,38 +1,38 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | Formatted with phpformatter.com
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | K&R style (One true brace style) is selected
 |
 */
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 1-бис) Простая функция добавления классов тегу <body>
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 */
 function polylog_preprocess_html(&$vars) {
     $path    = drupal_get_path_alias($_GET['q']);
     $aliases = explode('/', $path);
-    
+
     foreach ($aliases as $alias) {
         $vars['classes_array'][] = drupal_clean_css_identifier($alias);
     }
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 1) Функция добавления классов тегу <body> в зависимости от текущего адреса
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | TODO — solve the problem with class, object and for…in
 |
 | class foo {
 |     function do_foo() {
-|         echo "Doing foo."; 
+|         echo "Doing foo.";
 |     }
 | }
 |
@@ -42,21 +42,21 @@ function polylog_preprocess_html(&$vars) {
 */
 function polylog_body_classes() {
     /*
-	|
-	| Делим путь от корневого каталога: заменяем в URL-ах с параметрами знак '?' на '/',
-	| затем выбрасываем первый слэш и папку /ru/, остальные части записываем в четыре переменных
-	|
-	*/
+    |
+    | Делим путь от корневого каталога: заменяем в URL-ах с параметрами знак '?' на '/',
+    | затем выбрасываем первый слэш и папку /ru/, остальные части записываем в четыре переменных
+    |
+    */
     $path = str_replace('?', '/', $_SERVER['REQUEST_URI']);
     list(, , $path_section, $path_subsection1, $path_subsection2, $path_page) = explode('/', $path);
-    
+
     /*
-	|
+    |
     | Определяем, какому типу может принадлежать набор полученных переменных и метим их:
     | страницы раздела - 1i и 1
     | страницы подраздела 1-го уровня - 2i и 2
     | страницы подраздела 2-го уровня - 3i и 3
-	|
+    |
     */
     // $path_section=pr-help $path_subsection1=btl.htm $path_subsection2=empty 1
     if (empty($path_subsection1) || strpos($path_subsection1, '.htm')) {
@@ -69,15 +69,15 @@ function polylog_body_classes() {
     } else {
         $page = empty($path_page) || strpos($path_page, 'ndex.htm') ? '3i' : '3';
     }
-    
+
     /*
-	|
+    |
     | Чистим переменные от seo-слов.
     | TODO: проконсультироваться, как использовать массив для исходных строк.
     | $path_parts = array($path_section, $path_subsection1, $path_page);
     | $path_parts = str_replace($seo, '', $path_parts);
     | не получается - видимо, как-то связано с использованием массива переменных
-	|
+    |
     */
     $seo              = array(
         'btl-pr',
@@ -94,7 +94,7 @@ function polylog_body_classes() {
     $path_section     = str_replace($seo, '', $path_section);
     $path_subsection1 = str_replace($seo, '', $path_subsection1);
     $path_page        = str_replace($seo, '', $path_page);
-    
+
     // Проверяем, заменяем, чистим значение $path_section
     switch ($path_section) {
         case '--firm':
@@ -120,8 +120,8 @@ function polylog_body_classes() {
             break;
     }
     $path_section = trim($path_section, '-');
-    
-    
+
+
     // Проверяем, заменяем, чистим значение $path_subsection1
     switch ($path_subsection1) {
         case 'company-magazines-brochures-newsletters':
@@ -132,91 +132,91 @@ function polylog_body_classes() {
             break;
     }
     $path_subsection1 = trim($path_subsection1, '-');
-    
-    // Страницы новостей. Обрезаем значение года — $path_subsection2 и $path_subsection1 
+
+    // Страницы новостей. Обрезаем значение года — $path_subsection2 и $path_subsection1
     $path_subsection2 = substr($path_subsection2, 2);
     if ($path_section == 'news') { //New
         $path_subsection1 = substr($path_subsection1, 2);
     }
-    
+
     // Проверяем, заменяем, чистим значение $path_page
     $path_page = str_replace('.htm', '', $path_page);
     switch ($path_page) {
-        case 'list':
-            $path_page = 'clients_list';
-            break;
-        case 'integrated--':
-            $path_page = 'integrated_services';
-            break;
-        case '-event-':
-            $path_page = 'events';
-            break;
-        case 'government-authority-consulting':
-            $path_page = 'strategies';
-            break;
-        case 'event-management':
-            $path_page = 'events';
-            break;
+    case 'list':
+        $path_page = 'clients_list';
+        break;
+    case 'integrated--':
+        $path_page = 'integrated_services';
+        break;
+    case '-event-':
+        $path_page = 'events';
+        break;
+    case 'government-authority-consulting':
+        $path_page = 'strategies';
+        break;
+    case 'event-management':
+        $path_page = 'events';
+        break;
     }
     $path_page = trim($path_page, '-');
-    
+
     // Возвращаем значения
     switch ($page) {
-        case '1i':
-            if ($path_section == 'case_studies') {
-                return " class=\"clients\" id=\"$path_section\""; //New
-            } else {
-                return " class=\"$path_section\" id=\"$path_section\""; //Stay
-            }
-            break;
-        case '1':
-            if ($path_section == 'blog' || $path_section == 'help') {
-                return " class=\"$path_section\""; //New
-            } else {
-                return " class=\"$path_section\" id=\"$path_page\"";
-            }
-            break;
-        case '2i':
-            // $path_section=news $path_subsection1=2004 $path_subsection2=empty 2i
-            if ($path_subsection1 == 'blog' || $path_subsection1 == 'news' || $path_subsection1 == 'press') {
-                return " class=\"$path_subsection1\" id=\"$path_subsection1\"";
-            } elseif ($path_section == 'blog') {
-                return " class=\"$path_section\"";
-            } elseif ($path_section == 'news') {
-                return " class=\"$path_section arj_$path_subsection1\" id=\"{$path_section}_$path_subsection1\""; //New
-            } else {
-                return " class=\"$path_section\" id=\"$path_subsection1\"";
-            }
-            break;
-        case '2':
-            if ($path_section == 'news') {
-                return " class=\"$path_section arj_$path_subsection1\""; //New
-            } else {
-                return " class=\"$path_subsection1\"";
-            }
-            break;
-        case '3i':
-            if ($path_subsection1 == 'blog') {
-                return " class=\"$path_subsection1\"";
-            } else {
-                return " class=\"$path_subsection1 arj_$path_subsection2\" id=\"{$path_subsection1}_$path_subsection2\"";
-            }
-            break;
-        case '3':
-            if ($path_subsection1 == 'blog') {
-                return " class=\"$path_subsection1\"";
-            } else {
-                return " class=\"$path_subsection1 arj_$path_subsection2\"";
-            }
-            break;
+    case '1i':
+        if ($path_section == 'case_studies') {
+            return " class=\"clients\" id=\"$path_section\""; //New
+        } else {
+            return " class=\"$path_section\" id=\"$path_section\""; //Stay
+        }
+        break;
+    case '1':
+        if ($path_section == 'blog' || $path_section == 'help') {
+            return " class=\"$path_section\""; //New
+        } else {
+            return " class=\"$path_section\" id=\"$path_page\"";
+        }
+        break;
+    case '2i':
+        // $path_section=news $path_subsection1=2004 $path_subsection2=empty 2i
+        if ($path_subsection1 == 'blog' || $path_subsection1 == 'news' || $path_subsection1 == 'press') {
+            return " class=\"$path_subsection1\" id=\"$path_subsection1\"";
+        } elseif ($path_section == 'blog') {
+            return " class=\"$path_section\"";
+        } elseif ($path_section == 'news') {
+            return " class=\"$path_section arj_$path_subsection1\" id=\"{$path_section}_$path_subsection1\""; //New
+        } else {
+            return " class=\"$path_section\" id=\"$path_subsection1\"";
+        }
+        break;
+    case '2':
+        if ($path_section == 'news') {
+            return " class=\"$path_section arj_$path_subsection1\""; //New
+        } else {
+            return " class=\"$path_subsection1\"";
+        }
+        break;
+    case '3i':
+        if ($path_subsection1 == 'blog') {
+            return " class=\"$path_subsection1\"";
+        } else {
+            return " class=\"$path_subsection1 arj_$path_subsection2\" id=\"{$path_subsection1}_$path_subsection2\"";
+        }
+        break;
+    case '3':
+        if ($path_subsection1 == 'blog') {
+            return " class=\"$path_subsection1\"";
+        } else {
+            return " class=\"$path_subsection1 arj_$path_subsection2\"";
+        }
+        break;
     }
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 2) Удаляем из title bbcode: em, strong, span, b, small —
 | print polylog_strip($head_title)
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | Для того, что bbcode не выводился в RSS-лентах, ханкуть ядро:
 | В файле includes/common.inc найти функцию format_rss_item и перед первым $output-ом
@@ -240,9 +240,9 @@ function polylog_strip($text) {
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 3) Переводим bbcode в основном заголовке в html - print polylog_bb2html($title)
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 */
 function polylog_bb2html($text) {
     $bbcode   = array(
@@ -273,9 +273,9 @@ function polylog_bb2html($text) {
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 4) Переписываем theme_item_list
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | TODO: Moжет, убрать класс item_list.
 | И проверить, нужна ли функция в принципе — убрать и посмотреть на разметку
@@ -286,7 +286,7 @@ function polylog_item_list($items = array(), $title = NULL, $type = 'ul', $attri
     if (isset($title)) {
         $output = '<h3>' . $title . '</h3>';
     }
-    
+
     if (!empty($items)) {
         $output .= "<$type class=\"item_list\">";
         foreach ($items as $item) {
@@ -316,10 +316,10 @@ function polylog_item_list($items = array(), $title = NULL, $type = 'ul', $attri
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 4-бис) Переписываем html списков, создаваемый модулем Views -
 | оригинальная функция находится в views.module
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | TODO: проверить, нужна ли функция — убрать и посмотреть на разметку
 | генерируемых списков
@@ -327,20 +327,20 @@ function polylog_item_list($items = array(), $title = NULL, $type = 'ul', $attri
 */
 function polylog_views_view($view, $type, $nodes, $level = NULL, $args = NULL) {
     $num_nodes = count($nodes);
-    
+
     if ($type == 'page') {
         drupal_set_title(filter_xss_admin(views_get_title($view, 'page')));
         views_set_breadcrumb($view);
     }
-    
+
     if ($num_nodes) {
         $output .= views_get_textarea($view, $type, 'header');
     }
-    
+
     if ($type != 'block' && $view->exposed_filter) {
         $output .= views_theme('views_display_filters', $view);
     }
-    
+
     $plugins   = _views_get_style_plugins();
     $view_type = ($type == 'block') ? $view->block_type : $view->page_type;
     if ($num_nodes || $plugins[$view_type]['even_empty']) {
@@ -350,18 +350,18 @@ function polylog_views_view($view, $type, $nodes, $level = NULL, $args = NULL) {
             $output .= views_theme($plugins[$view_type]['theme'], $view, $nodes, $type);
         }
         $output .= views_get_textarea($view, $type, 'footer');
-        
+
         if ($type == 'block' && $view->block_more && $num_nodes >= $view->nodes_per_block) {
             $output .= theme('views_more', $view->real_url);
         }
     } else {
         $output .= views_get_textarea($view, $type, 'empty');
     }
-    
+
     if ($view->use_pager) {
         $output .= theme('pager', '', $view->pager_limit, $view->use_pager - 1);
     }
-    
+
     if ($output) {
         $output = $output;
     }
@@ -371,9 +371,9 @@ function polylog_views_view($view, $type, $nodes, $level = NULL, $args = NULL) {
 // Добавляем функции оформления для отдельных видов.
 function polylog_views_view_list($view, $nodes, $type) {
     $fields = _views_get_fields();
-    
+
     $taken = array();
-    
+
     // Set up the fields in nicely named chunks.
     foreach ($view->field as $id => $field) {
         $field_name = $field['field'];
@@ -383,13 +383,13 @@ function polylog_views_view_list($view, $nodes, $type) {
         $taken[$field_name] = true;
         $field_names[$id]   = $field_name;
     }
-    
+
     // Set up some variables that won't change.
     $base_vars = array(
         'view' => $view,
         'view_type' => $type
     );
-    
+
     foreach ($nodes as $i => $node) {
         $vars           = $base_vars;
         $vars['node']   = $node;
@@ -410,29 +410,29 @@ function polylog_views_view_list($view, $nodes, $type) {
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 5) Пэйджер
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 */
 function polylog_pager($tags = array(), $limit = 10, $element = 0, $parameters = array()) {
     global $pager_total;
     $output = '';
-    
+
     if ($pager_total[$element] > 1) {
         $output .= '<div class="pager cfx"><span class="caption">' . t('Pages') . ':</span>';
         $output .= theme('pager_previous', ($tags[1] ? $tags[1] : t('‹ previous')), $limit, $element, 1, $parameters);
         $output .= theme('pager_list', $limit, $element, ($tags[2] ? $tags[2] : 9), '', $parameters);
         $output .= theme('pager_next', ($tags[3] ? $tags[3] : t('next ›')), $limit, $element, 1, $parameters);
         $output .= '</div>';
-        
+
         return $output;
     }
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 6) Короткие ссылки — TinyURL
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 */
 function polylog_get_tinyurl($url) {
     $tinyurl = file_get_contents("http://tinyurl.com/api-create.php?url=" . $url);
@@ -440,9 +440,9 @@ function polylog_get_tinyurl($url) {
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 7) Переписываем формат вывода массива $links в заметке блога
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | TODO: переписать — выводить из массива не все ссылки,
 | убрать все классы с LI, рефакторинг
@@ -450,16 +450,16 @@ function polylog_get_tinyurl($url) {
 */
 function polylog_links($links, $attributes = array('class' => 'links')) {
     $output = '';
-    
+
     if (count($links) > 0) {
         $output = '<ul' . drupal_attributes($attributes) . '>';
-        
+
         $num_links = count($links);
         $i         = 1;
-        
+
         foreach ($links as $key => $link) {
             $class = '';
-            
+
             // Automatically add a class to each link and also to each LI
             if (isset($link['attributes']) && isset($link['attributes']['class'])) {
                 $link['attributes']['class'] .= ' ' . $key;
@@ -468,21 +468,21 @@ function polylog_links($links, $attributes = array('class' => 'links')) {
                 $link['attributes']['class'] = $key;
                 $class                       = $key;
             }
-            
+
             // Add first and last classes to the list of links to help out themers.
             $extra_class = '';
             if ($i == 1) {
                 $extra_class .= 'first ';
             }
             $output .= '<li class="' . $extra_class . $class . '">';
-            
+
             // Is the title HTML?
             $html = isset($link['html']) && $link['html'];
-            
+
             // Initialize fragment and query variables.
             $link['query']    = isset($link['query']) ? $link['query'] : NULL;
             $link['fragment'] = isset($link['fragment']) ? $link['fragment'] : NULL;
-            
+
             if (isset($link['href'])) {
                 $output .= l($link['title'], $link['href'], $link['attributes'], $link['query'], $link['fragment'], FALSE, $html);
             } else if ($link['title']) {
@@ -492,21 +492,21 @@ function polylog_links($links, $attributes = array('class' => 'links')) {
                 }
                 $output .= '<span' . drupal_attributes($link['attributes']) . '>' . $link['title'] . '</span>';
             }
-            
+
             $i++;
             $output .= "</li>\n";
         }
-        
+
         $output .= '</ul>';
     }
-    
+
     return $output;
 }
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | 8) Редирект на статичную страницу maintenance
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | TODO: проверить, нужна ли функция — убрать и посмотреть
 | на сайт переведенный в режим профилактики
@@ -518,9 +518,9 @@ function polylog_maintenance_page($content, $messages = TRUE, $partial = FALSE) 
 
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | В предыдущей версии остались функции:
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | - «различных задач»
 | - разметки формы комментариев comment_form
@@ -530,71 +530,71 @@ function polylog_maintenance_page($content, $messages = TRUE, $partial = FALSE) 
 */
 
 /*
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | Override or insert variables
 | I don't use this functions yet since practicing pure HTML.
 | But maybe someday they prove useful
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 |
 | // maintenance.tpl.php — Useful. Get the variables from other template
 | function polylog_preprocess_maintenance_page(&$vars) {
-|	polylog_preprocess_html($vars);
+|   polylog_preprocess_html($vars);
 | }
 |
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | // page.tpl.php - Hook into color.module; разметка «шапки», слоган сайта
 | function polylog_process_page(&$vars) {
-| 	if (module_exists('color')) {
-| 		_color_page_alter($vars);
-| 	}
+|   if (module_exists('color')) {
+|       _color_page_alter($vars);
+|   }
 | }
 |
 | function polylog_preprocess_page(&$vars) {
-| 	$site_fields = array();
-| 	if (!empty($vars['site_name'])) {
-| 		$site_fields[] = $vars['site_name'];
-| 	}
-| 	if (!empty($vars['site_slogan'])) {
-| 		$site_fields[] = $vars['site_slogan'];
-| 	}
-| 	
-| 	$vars['site_title'] = implode(' ', $site_fields);
-| 	if (!empty($site_fields)) {
-| 		$site_fields[0] = '<span>' . $site_fields[0] . '</span>';
-| 	}
-|	
-| 	$vars['site_html'] = implode(' ', $site_fields);
-| 	
-| 	$slogan_text = $vars['site_slogan'];
-| 	$site_name_text = $vars['site_name'];
-| 	$vars['site_name_and_slogan'] = $site_name_text . ' ' . $slogan_text;
+|   $site_fields = array();
+|   if (!empty($vars['site_name'])) {
+|       $site_fields[] = $vars['site_name'];
+|   }
+|   if (!empty($vars['site_slogan'])) {
+|       $site_fields[] = $vars['site_slogan'];
+|   }
+|
+|   $vars['site_title'] = implode(' ', $site_fields);
+|   if (!empty($site_fields)) {
+|       $site_fields[0] = '<span>' . $site_fields[0] . '</span>';
+|   }
+|
+|   $vars['site_html'] = implode(' ', $site_fields);
+|
+|   $slogan_text = $vars['site_slogan'];
+|   $site_name_text = $vars['site_name'];
+|   $vars['site_name_and_slogan'] = $site_name_text . ' ' . $slogan_text;
 | }
 |
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | // node.tpl.php
 | function polylog_preprocess_node(&$vars) {
-|	$vars['submitted'] = $vars['date'] . ' — ' . $vars['name'];
+|   $vars['submitted'] = $vars['date'] . ' — ' . $vars['name'];
 | }
 |
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | // region.tpl.php
 | function polylog_preprocess_region(&$vars) {
-| 	if ($vars['region'] == 'header') {
-| 		$vars['classes_array'][] = 'cfx';
-| 	}
+|   if ($vars['region'] == 'header') {
+|       $vars['classes_array'][] = 'cfx';
+|   }
 | }
 |
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | // comment.tpl.php
 | function polylog_preprocess_comment(&$vars) {
-| 	$vars['submitted'] = $vars['created'] . ' — ' . $vars['author'];
+|   $vars['submitted'] = $vars['created'] . ' — ' . $vars['author'];
 | }
 |
-|--------------------------------------------------------------------------
+|-------------------------------------------------------------------------------
 | // block.tpl.php
 | function polylog_preprocess_block(&$vars) {
-| 	$vars['title_attributes_array']['class'][] = 'title';
-| 	$vars['classes_array'][] = 'cfx';
+|   $vars['title_attributes_array']['class'][] = 'title';
+|   $vars['classes_array'][] = 'cfx';
 | }
 |
 */
