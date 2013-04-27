@@ -1,0 +1,220 @@
+@import '02-variables.less';
+@import '02-mixins.less';/*
+| @winheight:`$(window).height()`  // Keep backticks not single quotes
+| height: ~'@{winheight}px';
+*/
+
+@gallery-height:                380px; // default image min-height
+@gallery-width:                 860; // image width in pixel
+@tbn-ul-height:                 88px;
+@tbn-height:                    86px; // li and a height -2px for border
+@tbn-width:                     154px;
+@tbn-margin:                    20px; // thumbnail gutter
+
+@next-prev-height:              33px;
+@next-prev-width:               33px;
+@next-prev-arrow-height:        10px;
+@next-prev-arrow-width:         7px;
+@next-prev-v-pos:               ~`Math.ceil(parseInt('@{tbn-ul-height}') / 2) - Math.floor(parseInt("@{next-prev-height}") / 2)`;
+@next-prev-h-pos:               -(@next-prev-width + 27px);
+@next-prev-h-pos-tablet:        ~`Math.floor(parseInt('@{@next-prev-width}') / 2)`;
+@next-prev-arrow-v-pos:         ~`Math.floor(parseInt('@{next-prev-arrow-height}') / 2)`;
+@next-prev-arrow-h-pos:         ~`Math.floor(parseInt('@{next-prev-arrow-width}') / 2)`;
+@prev-arrow-bg:                 -18px -162px;
+@next-arrow-bg:                 -78px -162px;
+
+
+
+/* Gallery */
+.sec-gallery, DIV#gallery, FIGURE.gallery {
+    margin-bottom: @baseline;
+    overflow: hidden;
+    position: relative;
+    min-height: @gallery-height;
+    *height: @gallery-height;
+    width: auto;
+    *zoom: 1; }
+
+.sec-gallery, FIGURE.gallery { overflow: visible; }
+
+/*
+|---------------------------------------
+| Legacy
+|---------------------------------------
+| NAV.gallery, UL.gallery {
+|   position: absolute;
+|   top: 0;
+|   left: 0;
+|   width: 78px; }
+|
+| FIGURE.gallery UL {
+|   position: absolute;
+|   top: 39px;
+|   left: -100px;
+|   width: 78px; }
+|
+| #news NAV.gallery, #news UL.gallery, .arj_11 NAV.gallery, .arj_11 UL.gallery, .arj_10 UL.gallery, .arj_09 UL.gallery, .arj_08 UL.gallery, .arj_07 UL.gallery, .arj_06 UL.gallery, .arj_05 UL.gallery, .arj_04 UL.gallery { top: 239px }
+|
+| FIGURE.gallery UL, NAV.gallery, UL.gallery {
+|   position: absolute;
+|   top: 0;
+|   left: 0;
+|   width: 78px; }
+|
+*/
+
+DIV#gallery, FIGURE.gallery {
+    FIGCAPTION { padding: @baseline/2 0 0; }
+}
+
+FIGURE.gallery UL, NAV.gallery, UL.gallery {
+    list-style-image: none;
+    list-style-type: none;
+    width: 100%;
+    *zoom: 1;
+
+    &:before, &:after {
+        content: '';
+        display: table;
+        line-height: 0; }
+
+    &:after { clear: both; }
+}
+
+NAV.gallery, UL.gallery, FIGURE.gallery {
+    LI {
+        float: left;
+        margin: 0 10px @baseline/2 0;
+
+        A {
+            border: @brd;
+            display: block;
+            text-indent: -400em;
+            height: 60px;
+            width: 78px; }
+        }
+    }
+
+UL.gallery LI A { height: 58px; }
+
+/*
+|---------------------------------------
+| MODERN SOLUTION
+|---------------------------------------
+*/
+.tbn-viewport {
+    position: relative;
+    overflow: hidden;
+    height: @tbn-ul-height;
+    width: 100%;
+    *zoom: 1;
+
+    UL {
+        list-style-image: none;
+        list-style-type: none;
+        margin: 0 0 0 -@tbn-margin;
+        padding: 0;
+        position: absolute;
+        left: 0;
+        top: @baseline;
+        max-height: @tbn-ul-height;
+        *height: @tbn-ul-height;
+        width: auto;
+
+        LI {
+            border: @brd;
+            display: inline;
+            float: left;
+            margin-left: @tbn-margin;
+            overflow: hidden; }
+
+        LI, A {
+            height: @tbn-height;
+            width: @tbn-width; }
+
+        A {
+            display: block;
+            text-indent: -400em; }
+    }
+}
+
+.sec-gallery .disable {
+    .opacity(0);
+    .transition(opacity .4s linear); }
+
+.tbn-prev, .tbn-next {
+    #gradient > .vertical(@c-btn-secondary-light, @c-btn-secondary-dark);
+    border-color: @c-btn-secondary-brd;
+    border-color-bottom: @c-btn-secondary-brd-b;
+    .border-radius(2px);
+    .ir(1px); /* Image replacement for bordered items */
+    padding: 0;
+    position: absolute;
+    .pseudo-before;
+    bottom: 0px + @next-prev-v-pos;
+    height: @next-prev-height;
+    width: @next-prev-width;
+
+    &:before, .before { /* Buttons icons */
+        content: '';
+        display: block;
+        line-height: 0;
+        margin: -(0px + @next-prev-arrow-v-pos) 0 0 -(0px + @next-prev-arrow-h-pos);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: @next-prev-arrow-height;
+        width: @next-prev-arrow-width; }
+
+    &:hover { background-color: @c-btn-secondary-light; }
+    &:active { background-color: @c-btn-secondary-dark; }
+    }
+
+.tbn-prev {
+    left: @next-prev-h-pos;
+    &:before, .before { background-position: @prev-arrow-bg; }
+}
+
+.tbn-next {
+    right: @next-prev-h-pos;
+    &:before, .before { background-position: @next-arrow-bg; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| PORTRAIT TABLETS: 768–979px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (min-width: 768px) and (max-width: 979px) {
+
+.tbn-prev { left: -15px; }
+.tbn-next { right: -15px; }
+
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+    .sec-gallery, DIV#gallery, FIGURE.gallery {
+        min-height: auto;
+        height: auto; }
+
+    UL { padding-left: 0; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| PORTRAIT PHONES
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 479px) {
+    .tbn-viewport, FIGURE.gallery UL, NAV.gallery, UL.gallery { display: none; }
+}

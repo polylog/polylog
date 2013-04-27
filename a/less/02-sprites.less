@@ -1,0 +1,55 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+/* Main sprite */
+.a-cta:after, .a-cta .after,
+.aft-share .email A, .aft-share-mob .body-label-4dd,
+.box HEADER :after, .box HEADER .after,
+.sec-services A:after, .sec-services A .after,
+.btn-back, .btn-close, BUTTON.close, .btn-menu:before, .btn-search:before,
+.btn-with-icon:before, .btn-with-icon .before,
+.caret,
+.doc-header H1 A, .f-search BUTTON, I.co,
+.ftr-logo A,
+.on-demand H3 I, .on_demand H3 I,
+.sys-message P:before, .warning-gl EM,
+.tbn-next:before, .tbn-next .before, .tbn-prev:before, .tbn-prev .before,
+.tabs-with-icons A {
+    background-color: transparent;
+    background-image: url(@base-graphics) !important; /* Prevent buttons styles assigning */
+    background-repeat: no-repeat; }
+
+#beeline, #cln_beeline SPAN, #cln_mpf SPAN, #cln_borjomi SPAN, #lukoil, #rus_bel, #sangtuda,
+.case_studies A, .sec-clients LI A, .sec-clients LI SPAN
+{ background: transparent url(/a/img/clients.png) no-repeat; }
+
+/*
+|---------------------------------------
+| High resolution devices
+|---------------------------------------
+*/
+ @media print,
+        (-o-min-device-pixel-ratio: 5/4),
+        (-webkit-min-device-pixel-ratio: 1.25),
+        (min-resolution: 120dpi) {
+
+    .a-cta:after, .a-cta .after, .aft-share .email A, .aft-share-mob .body-label-4dd,
+    .sec-services A:after, .sec-services A .after,
+    .box HEADER :after, .box HEADER .after,
+    .btn-back, .btn-close, BUTTON.close, .btn-menu:before, .btn-search:before,
+    .btn-with-icon:before, .btn-with-icon .before,
+    .caret,
+    .doc-header H1 A, .f-search BUTTON, I.co,
+    .ftr-logo A,
+    .on-demand H3 I, .on_demand H3 I,
+    .sys-message P:before, .warning-gl EM,
+    .tbn-next:before, .tbn-next .before, .tbn-prev:before, .tbn-prev .before,
+    .tabs-with-icons A {
+        background-image: url(@base-graphics-x2) !important;
+        .background-size(400px 400px); /* Half of physical retina sprite image */ }
+
+    #beeline, #cln_beeline SPAN, #cln_mpf SPAN, #cln_borjomi SPAN, #lukoil, #rus_bel, #sangtuda,
+    .case_studies A, .sec-clients LI A, .sec-clients LI SPAN {
+        background-image: url(/a/img/clients-x2.png);
+        .background-size(400px 500px); }
+}

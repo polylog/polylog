@@ -1,0 +1,128 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+DL, DD { margin: 0 0 @baseline; }
+
+DT {
+    font-weight: bold;
+    margin: 0; }
+
+OL {
+    list-style: decimal;
+    list-style-position: inside;
+    margin: 0 0 @baseline;
+    padding: 0; }
+
+UL {
+    list-style-image: url(/a/img/b.gif);
+    margin: 0 0 @baseline;
+    padding: 0;
+    *padding-left: 20px; }
+
+LI UL, LI OL {
+    margin-bottom: 0;
+    padding-left: 20px; }
+
+NAV UL, NAV OL {
+    list-style: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0; }
+
+OL.unstyled, UL.unstyled {
+    padding-left: 0;
+    list-style: none; }
+
+UL.inline {
+    list-style: none;
+    list-style-image: none;
+    padding: 0;
+
+    LI {
+        border-right: @brd;
+        .inline-block;
+        padding: 0 10px 0 5px; }
+
+    LI.last {
+        border-right: 0;
+        padding-right: 0; }
+
+     }
+
+.list-view {
+    list-style: none;
+    list-style-image: none;
+    padding: 0;
+
+    LI { margin-bottom: @baseline; }
+
+     }
+
+.m-local {
+    border-bottom: @brd;
+    padding: 0 0 (@baseline - 1em/@b);
+
+    LI {
+        border-left: @brd;
+        display: inline;
+        padding: 0 .3em 0 .6em; }
+
+    LI:first-child, .first {
+        border-left: 0 none;
+        padding-left: 0; }
+    }
+
+HEADER .m-local {
+    border-bottom: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0; }
+
+/*News*/
+.p-news .doc-body > .item_list, .p-news-index .doc-body > .item_list,
+//legacy styles
+UL.news_archive, .news .item_list {
+    list-style-image: none;
+    list-style-type: none;
+    margin: 0 0 @baseline;
+
+    LI {
+        padding-left: 60em/@b;
+        position: relative;
+        margin-bottom: @baseline/2;
+        *zoom: 1; }
+
+    .date {
+        position: absolute;
+        top: 0;
+        left: 0; }
+
+    // A { color: @c-txt; }
+    // EM { color: @c-link; }
+}
+
+.news .item_list { margin: 0; }
+
+SPAN.date {
+    color: @c-nt;
+    padding-left: .3em;}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+@media only screen and (max-width: 767px) {
+
+UL { padding-left: 20px; }
+
+DL, DD, OL, UL, .list-view LI { margin-bottom: @baseline-mob; }
+
+HEADER .m-local {
+    margin-bottom: @baseline-mob;
+    position: static; }
+
+}

@@ -1,0 +1,59 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+FIGURE { margin: 0 0 @baseline; }
+
+    FIGCAPTION { padding: @baseline 0 0; } /* Fine tune top padding: (@baseline - x/@b) */
+
+/* Fluid media requires that you remove the media's height and width attributes from the HTML */
+IMG { margin: 0 0 @baseline; }
+
+    FIGURE IMG { margin-bottom: 0; }
+
+    IMG.left, FIGURE.left, DIV.left {
+        float: left;
+        margin: 2px 20px 10px 0; }
+
+    IMG.right, FIGURE.right, DIV.right {
+        float: right;
+        margin: 2px 0 10px 20px; }
+
+    FORM IMG { margin: 0; }
+
+I.co {
+    /* Main sprite */
+    background-position:;
+    .ir;}
+
+OBJECT, EMBED {
+    *margin-top: @baseline;
+    margin-bottom: @baseline; }
+
+SVG:not(:root) { overflow: hidden; }
+
+VIDEO { width: 100% !important; }
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+FIGURE { margin-bottom: @baseline-mob; }
+
+    FIGCAPTION { padding-top: @baseline-mob; }
+
+IMG { margin: 0 0 @baseline-mob; }
+
+IMG, FIGURE, DIV {
+    .left, .right { max-width: 44%; }
+}
+
+OBJECT, EMBED {
+    *margin-top: @baseline-mob;
+    margin-bottom: @baseline-mob; }
+}
+

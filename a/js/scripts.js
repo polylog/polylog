@@ -58,6 +58,10 @@
 |-------------------------------------------------------------------------------
 | TABS
 |-------------------------------------------------------------------------------
+|
+| TODO: Use the parameters of the function definition and the arguments
+| of a function call. Or use JQuery UI instead
+|
 */
 function tabs() {
     function switchTabs(obj) {
@@ -69,7 +73,7 @@ function tabs() {
         obj.addClass('tab-selected');
     }
 
-    switchTabs($('.tabs :first-child a'));
+    switchTabs($('.sm-blog .tabs :first-child a, .tabs-tuts :last-child a'));
 
     $('.tabs a').click(function(){
         switchTabs($(this));
@@ -384,13 +388,53 @@ function collapsibles() {
 
 /*
 |-------------------------------------------------------------------------------
+| SET THE ORDERED NUMBERS BOLD
+|-------------------------------------------------------------------------------
+*/
+function setOrderedNumbersBold() {
+    $('ol:not(.unstyled) li').wrapInner('<div class="inline" />');
+    $('ol:not(.unstyled)').css('font-weight', 'bold');
+    $('ol li div.inline').css('font-weight', 'normal');
+}
+
+/*
+|-------------------------------------------------------------------------------
+| FLUID WIDTH VIDEO
+|-------------------------------------------------------------------------------
+*/
+function fluidVideo() {
+    var $allVideos = $('iframe[src^="http://player.vimeo.com"], iframe[src^="http://www.youtube.com"], iframe[src*="dailymotion.com"], object:not([class*="not-video"]):not(:has(embed)), embed:not([class*="not-video"])'),
+    $fluidEl = $('figure');
+
+    // Remove width and height
+    $allVideos.each(function() {
+    $(this)
+        // jQuery .data does not work on object/embed elements
+        .attr('data-aspectRatio', this.height / this.width)
+        .removeAttr('height')
+        .removeAttr('width');
+    });
+
+    // Resize on window resize
+    $(window).resize(function() {
+        var newWidth = $fluidEl.width();
+        $allVideos.each(function() {
+            var $el = $(this);
+            $el
+            .width(newWidth)
+            .height(newWidth * $el.attr('data-aspectRatio'));
+        });
+    }).resize();
+}
+
+/*
+|-------------------------------------------------------------------------------
 | CALLING FUNCTIONS
 |-------------------------------------------------------------------------------
 | After the DOM is loaded
 |
 */
 $(document).ready(function(){
-    $('iframe[src^="http://player.vimeo.com"], iframe[src^="http://www.youtube.com"], iframe[src*="dailymotion.com"]').wrap('<figure class="video" />');
     $('ol, ul').prev('p').css('margin-bottom', '0'); //lists captions
     dropDowns();
     toolTip();
@@ -400,11 +444,14 @@ $(document).ready(function(){
     collapsibles();
     modalBox();
     tabs();
+    fluidVideo();
     $('.sec-gallery').tinycarousel();
     $('.tut01').flash({swf:'/a/video/01.swf',height:331,width:522});
     $('.bnr_msb div').flash({swf:'/a/img/banners/moscow-speakers-bureau-580.swf',height:100,width:580});
+    setOrderedNumbersBold();
     galeryOld();
-    // mobileHeaderImg();
+    mobileHeaderImg();
+    $('.gallery figcaption ul').css('margin-top', '0'); // remove old inline styles
 });
 
 /*

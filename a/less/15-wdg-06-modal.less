@@ -1,0 +1,205 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+@mb-width:                      640px;
+
+/* .modal-box is just a container that centered header bar and body */
+.modal-box {
+    display: none;
+    text-align: center;
+    .fixed-on-top;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    .height-100p;
+    width: 100%;
+    z-index: @z-modal;
+
+    /* Header bar of several content types */
+    .mb-header, HEADER, .header, .single FIGCAPTION, .single .figcaption, DIV.caption {
+        #gradient > .vertical-three-colors(#f1f4f8, #e0e3e7, 84%, #e7eaee);
+        .border-radius(4px 4px 0 0);
+        border-bottom: 1px solid #cfd2d6;
+        text-shadow: 0 1px 0 rgba(255,255,255,.8);
+        position: relative; }
+
+    .mb-header, HEADER, .header, DIV.caption {
+        margin: 60px auto 0;
+        position: relative;
+        height: 44px;
+        width: @mb-width; }
+
+    .single FIGCAPTION, .single .figcaption {
+        margin-left: -320px;
+        padding: 4px 40px 0;
+        position: absolute;
+        top: 60px;
+        left: 50%; }
+
+    /* Header bar label */
+    .mb-header H2, HEADER H2, .header H2, .single FIGCAPTION, .single .figcaption, DIV.caption H2 {
+        color: @c-txt;
+        font: bold 100% @font-sans;
+        line-height: 40px; /* 44px height of header bar minus 4px of top padding */
+        text-align: left;
+        text-shadow: 0 1px 0 rbga(255, 255, 255, .4);
+        height: 40px;
+        width: 560px; }
+
+    .mb-header H2, HEADER H2, .header H2, DIV.caption H2 {
+        margin: 0;
+        padding: 4px 0 0 40px;
+        *padding-left: 0; }
+
+    .btn-close, BUTTON.close {
+        background-position: -90px -210px;
+        position: absolute;
+        top: 17px;
+        right: 20px;
+        height: 15px;
+        width: 15px;
+        z-index: 2; }
+
+    /*
+    |-------------------------------
+    |   .tabs {
+    |       list-style-image: none;
+    |       list-style-type: none;
+    |       margin: 0;
+    |       padding: 0;
+    |       position: absolute;
+    |       top: 12px;
+    |       right: 40px;
+    |       height: 40px;
+    |
+    |       LI, A {
+    |           display: block;
+    |           float: left; }
+    |       LI { margin: 0 0 0 1px }
+    |
+    |       A {
+    |           color: #FFF;
+    |           font-weight: normal;
+    |           line-height: 20px;
+    |           text-decoration: none;
+    |           padding: 0 10px;
+    |           height: 20px; }
+    |       LI:hover A, .current A {
+    |           background: #888B8F;
+    |           .border-radius(3px); }
+    |   }
+    |
+    */
+
+    /* Body of window */
+    ARTICLE, .article, .pane, .single, DIV.body {
+        background: @bg;
+        .border-radius(0 0 4px 4px);
+        .box-sizing(border-box);
+        text-align: left;
+        *margin-top: -3px;
+        padding: 22px 40px 66px;
+        overflow-y: auto;
+        max-height: 64%;
+        _height: 21 * @bl + 0px; // 462px
+        width: @mb-width; }
+
+    ARTICLE, .article, .pane, DIV.body { margin: 0 auto }
+
+    .single { margin: 100px auto 0 }
+
+    /* Legacy */
+    .cap_bottom { display: none; }
+
+    /*
+    |-------------------------------
+    | IFRAME { // There is unsolved problem in OLD FF with render IFRAME. So, we use just AJAX content. But jQuery clean up head section. So, everything is ok
+    |   border: 0 none;
+    |   overflow: auto;
+    |   overflow-x: hidden;
+    |   overflow-y: auto;
+    |   margin: 0 auto;
+    |   *margin-top: -3px;
+    |   height: 70px;
+    |   _height: 430px;
+    |   width: 640px; }
+    |
+    */
+
+    /* Content */
+    H1 { padding-top: 0; }
+
+    /*Legacy: markup, images*/
+    FOOTER, .footer, .cap_bottom { display: none; }
+
+    /*DIV.gallery,*/ UL.gallery { display: none; }
+    .img_caption { color: #85888C }
+
+    .horizontal {
+        height: auto;
+        width: 300px; }
+
+    .img_caption IMG {
+        display: block;
+        margin: 0 0 @baseline; }
+
+    .vertical {
+        height: auto;
+        width: 200px; }
+}
+
+.overlay { /*We can ty use IFRAME.overlay if we need to execute modal boxes over flash content*/
+    background: #000;
+    display: none;
+    .opacity(64);
+    .fixed-on-top;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: @z-overlay; }
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+    .modal-box {
+        .box-sizing(border-box);
+        padding: 10px;
+
+        .mb-header, HEADER, .header, DIV.caption, .single FIGCAPTION, .single .figcaption {
+            .box-sizing(border-box);
+            margin: 0;
+            padding: 4px 40px 0 20px;
+            position: static;
+            top: auto;
+            left: auto;
+            width: 100%; }
+
+        /* Header bar label */
+        .mb-header H2, HEADER H2, .header H2, .single FIGCAPTION, .single .figcaption, DIV.caption H2 {
+            .text-overflow;
+            padding: 0;
+            width: 100%; }
+
+        .btn-close, BUTTON.close {
+            top: 27px;
+            right: 25px; }
+
+        /* Body of window */
+        ARTICLE, .article, .pane, .single, DIV.body {
+            margin: 0;
+            padding: 22px 20px;
+            max-height: none;
+            height: auto;
+            width: 100%; }
+
+        /*Legacy: images*/
+        .img_caption, .horizontal, .vertical { display: none; }
+    }
+}

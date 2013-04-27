@@ -1,0 +1,152 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+.aft {
+    border-top: 1px solid #eaedf1;
+    background: #fff;
+    .opacity(92);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    *position: absolute;
+    *top: ~'expression(eval(document.compatMode && document.compatMode=="CSS1Compat") ? documentElement.scrollTop +(documentElement.clientHeight-this.clientHeight) : document.body.scrollTop +(document.body.clientHeight-this.clientHeight))';
+    height: 3*@baseline - 1em/@b;
+    width: 100%;
+    z-index: 24;
+
+    H2 {
+        color: @c-nt;
+        float: left;
+        font-size: @h3sharp-font-size;
+        padding: 0; }
+}
+
+.aft-body {
+    margin: 0 auto;
+    padding-top: 26em/@b;
+    height: 3*@baseline - 27em/@b; // - border and top padding
+    max-width: 860px;
+    width: 99%;
+    *width: ~'expression( document.body.clientWidth > 859 ? "860px" : "auto")'; }
+
+.aft-share {
+    float: right;
+    list-style-image: none;
+    list-style-type: none;
+    margin: -4em/@b 0 0;
+    padding-top: ;
+    height: ;
+
+    LI {
+        .inline-block;
+        margin: 0 .2em;
+        position: relative;
+        overflow: hidden;
+        height: 20px;
+        vertical-align: middle;
+        *zoom: 1; }
+
+    .fb, .li, .goo {
+        min-width: 50px;
+        *width: 50px; }
+
+    .su { height: 31px; }
+
+        DIV {
+            position: absolute;
+            bottom: 0;
+            left: 0;}
+
+        .fb DIV {
+            left: auto;
+            bottom: -3px;
+            right: 0; }
+
+        .goo DIV { bottom: -4px; }
+
+    .email A {
+        background-position: -150px -260px;
+        .ir;
+        margin-top: 1px;
+        height: 18px;
+        width: 26px; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| PORTRAIT TABLETS: 768–979px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (min-width: 768px) and (max-width: 979px) {
+
+.aft-body {
+    .box-sizing(border-box);
+    padding-right: 38px;
+    padding-left: 38px; }
+
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+.aft {
+    border-top: 0;
+    background: transparent;
+    .opacity(100);
+    position: static;
+    height: auto;
+    width: 100%;
+
+    H2 {
+        float: none;
+        font-family: @font-sans;
+        font-size: 100%;
+        padding: 0;
+
+    .pc-inl { display: inline !important}
+    }
+}
+
+.aft-body {
+    margin: 0 auto;
+    padding-top: 0;
+    height: auto; // - border and top padding
+    max-width: none;
+    width: auto; }
+
+.aft-share { display: none; }
+
+/* Sharing */
+.aft-share-mob .body-dropup {
+    LI {
+        padding: 0 0 0 24px;
+        position: relative;
+        *zomm: 1; }
+
+    A {
+        color: @c-mm-link;
+        display: block;
+        padding: 5px 0;
+        text-decoration: none; }
+
+    I.co {
+        position: absolute;
+        left: 0;
+        top: 6px;
+        height: 20px;
+        width: 20px; }
+}
+
+.aft-share-facebоok I.co { background-position: -190px -260px; }
+.aft-share-twitter I.co { background-position: -230px -260px; }
+.aft-share-linkedin I.co { background-position: -270px -260px; }
+.aft-share-mail I.co  { background-position: -310px -260px; }
+
+}

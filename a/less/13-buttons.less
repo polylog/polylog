@@ -1,0 +1,262 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+@c-btn-light:                   #f4f7fb;
+@c-btn-dark:                    #edf0f4;
+@c-btn-brd-t:                   #66c; // Light gradient -10%;
+@c-btn-brd:                     #5c5cc2; // Dark gradient -5%
+
+@c-btn-mob-header-light:        #f0f3f7;
+@c-btn-mob-header-dark:         #e2e5e9;
+@c-btn-mob-header-brd:          rgba(0, 0, 0, .2);
+
+/* @c-btn-info-light:
+    @c-btn-info:
+    @c-btn-info-dark:
+    @c-btn-success:
+    @c-btn-warning: */
+
+.btn-line { margin-top: 3/2*@baseline; }
+
+BUTTON, .btn { /* Test comment */
+    -webkit-appearance: none; /* Prevent webkit buttons styling */
+    #gradient > .vertical-three-colors(#8080e5, #66c, 88%, #6c6cd2);
+    border: 1px solid #5c5cc2;
+    *border: 0;
+    border-color: @c-btn-brd-t @c-btn-brd @c-btn-brd;
+    .border-radius(3px);
+    .box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 1px 1px rgba(0, 0, 0, 0.16));
+    color: #fff;
+    cursor: pointer;
+    .inline-block;
+    font-size: 100%;
+    line-height: inherit;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, .44);
+    margin-top: -2em/@b; // margin-top: -1/2*@baseline;
+    // margin-bottom: 1.5*@baseline;
+    *margin-left: .3em;
+    &:first-child { *margin-left: 0; }
+    padding: (1/2*@baseline - 1/@b) 13px;
+    vertical-align: middle;
+
+    &:hover {
+        background-color: #8080e5; /* Gradient goes up to uncover its dark side */
+        background-position: 0 15px;
+        color: #fff;
+        text-decoration: none;
+        .transition(background-position 0.2s linear); }
+
+    &:focus { .tab-focus; }
+
+    &:active, &.active { /* Replace gradient with darker color. Add deep inner shade */
+        background-color: #66c;
+        background-image: none;
+        .box-shadow(inset 0 2px 4px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.12));
+        outline: 0; }
+
+    &.disabled, &[disabled] {
+        background-color: darken(@bg, 10%);
+        background-image: none;
+        .box-shadow(none);
+        cursor: default;
+        .opacity(44); }
+    }
+
+FORM BUTTON, FORM .btn {
+    margin-left: 0;
+    margin-right: 0; }
+
+BUTTON { *padding: 11px 10px; /* Standart top and bottom padding -2px */ }
+
+.f-actions BUTTON, .f-actions .btn, .f-inline BUTTON, .f-inline .btn {
+    display: inline-block;
+    *display: inline; }
+
+/*
+|---------------------------------------
+| Icon buttons reset
+|---------------------------------------
+*/
+.btn-close, BUTTON.close {
+    background-color: transparent !important;
+    border: 0 !important;
+    .border-radius(0);
+    .box-shadow(none);
+    .ir;
+    padding: 0 !important;
+
+    &:hover { .transition(none); }
+
+    &:active, &.active { .box-shadow(none); }
+
+    &.disabled, &[disabled] {
+        cursor: default;
+        .opacity(44); }
+    }
+
+/*
+|---------------------------------------
+| With icons
+|---------------------------------------
+*/
+.btn-with-icon {
+    padding-left: 40px;
+    .pseudo-before;
+    position: relative;
+    *zoom: 1;
+
+
+    &:before, .before {
+        content: '';
+        .ir;
+        margin-top: -12px;
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        height: 24px;
+        width: 24px; }
+}
+
+.btn-skype {
+    &:before, .before { background-position: -120px -210px; }
+}
+
+.btn-email {
+    font-weight: bold;
+    padding-left: 32px;
+
+    &:before, .before { background-position: -160px -210px; }
+}
+
+/*
+|---------------------------------------
+| Btn-sizes
+|---------------------------------------
+*/
+
+.btn-large {
+    font-size:;
+    padding:;
+    *padding:; /* Standart top and bottom padding -2px */ }
+
+.btn-small {
+    padding: 6px 10px;
+    *padding: 4px 10px; }
+
+TABLE BUTTON, TABLE .btn { *overflow: auto; }
+
+/*
+|---------------------------------------
+| Clear and close
+|---------------------------------------
+*/
+
+BUTTON.clear, BUTTON.close { background: @c-clear-close; }
+
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+.btn-line { margin-top: 0; }
+
+.doc-body {
+    BUTTON, .btn {
+        .box-sizing(border-box);
+        display: block;
+        margin-top: 3/2*@baseline-mob; /* Fine-tuning */
+        margin-bottom: 1.5*@baseline-mob;
+        padding: (1/2*@baseline-mob - 1em/@bm) 13px;
+        max-width: 50%;
+    }
+
+
+    BUTTON + BUTTON, .btn + .btn { margin-top: @baseline-mob/2; }
+
+}
+
+.btn-menu, .btn-option, .btn-search { /* Buttons in mobile header */
+    #gradient > .vertical(@c-btn-mob-header-light, @c-btn-mob-header-dark);
+    border-color: @c-btn-mob-header-brd;
+    .border-radius(5px);
+    .box-shadow(inset 0 1px 0 #f8fbff, 0 1px 0 rgba(255, 255, 255, .48));
+    color: #b8bbbf !important;
+    display: inline-block;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    margin: 0;
+    padding: 9px 9px 6px;
+    position: absolute;
+    min-height: 12px;
+    min-width: 24px;
+
+    &:hover { background-color: @c-btn-mob-header-light; }
+    &:active { background-color: @c-btn-mob-header-dark; }
+    }
+
+
+.btn-back { /* Button Back in mobile header */
+    /* Main sprite */
+    .ir;
+    background-position: 0 -60px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 75%;
+    line-height: 1;
+    position: absolute;
+    min-height: 12px;
+    min-width: 24px;
+    vertical-align: middle;
+    height: 30px;
+    width: 49px;
+    *zoom: 1;
+
+    &:hover { background-position: -120px 0; }
+
+    &:active { background-position: -180px 0; }
+    }
+
+.btn-back, .btn-menu, .btn-option, .btn-search { top: 9px; }
+.btn-back, .btn-menu { left: 10px; }
+.btn-option, .btn-search { right: 10px; }
+
+/* Buttons with icons */
+.btn-menu, .btn-search {
+    .ir(1px); /* Image replacement for bordered items */
+    .pseudo-before();
+
+    &:before { /* Buttons icons */
+        /* Main sprite */
+        content: '';
+        display: block;
+        line-height: 0;
+        position: absolute;
+        top: 0;
+        left: 6px;
+        height: 30px;
+        width: 30px; }
+    }
+
+    .btn-menu:before { background-position: -120px -60px; }
+    .btn-search:before { background-position: -150px -60px; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| PORTRAIT PHONES: up to 480px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 480px) {
+    .doc-body {
+        BUTTON, .btn { max-width: none; }
+    }
+}

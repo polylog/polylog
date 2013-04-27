@@ -1,0 +1,57 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+HTML { overflow-y: scroll; }
+
+BODY {
+    background: @bg-body;
+    counter-reset: section;
+    text-align: center;
+    margin: 0;
+    padding: 0; }
+
+.page {
+    background: @bg-body; /* Repeat body background for slide out manipulation */
+    text-align: left;
+    position: relative;
+    margin: 0 auto;
+    min-height: 100%;
+    height: auto;
+    *height: 100%;
+    max-width: @mw + 0px;
+    width: auto;
+    *width: @mw + 0px;
+    *zoom: 1; }
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+HTML { overflow-y: auto; }
+
+BODY, .page { background: @bg none; }
+
+HTML, BODY {
+    /* WARNING. Don't use height: 100% for modern browsers.
+    It causes bugs with fixed position in mobile versions.
+    Min-height doesn't work at all */
+    height: auto; }
+
+.page {
+    .box-sizing(border-box);
+    padding: 0 20px 0;
+    max-width: none;
+    width: auto; }
+
+/* Set body overflow-x and page width for slide-out.
+In emergency case move it in slideOut function.
+On the other hand, if these styles can prove their worth, to rewrite the rules above. */
+BODY { overflow-x: hidden; }
+.page { width: 100%;}
+
+}

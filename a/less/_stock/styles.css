@@ -1,0 +1,50 @@
+/* CSS Reset */
+@import '/a/css/01-normalize.css';
+
+/* Variables, mixins, sprites */
+@import '/a/css/02-variables.css';
+@import '/a/css/02-mixins.css';
+@import '/a/css/02-sprites.css';
+
+/* Global styles */
+@import '/a/css/03-page.css';
+@import '/a/css/04-layout.css';
+@import '/a/css/05-typography.css';
+@import '/a/css/06-lists.css';
+@import '/a/css/07-media.css';
+
+/* Regions and menus */
+@import '/a/css/08-header-main-menu.css';
+@import '/a/css/08-dropdowns.css';
+@import '/a/css/08-boxes.css';
+@import '/a/css/09-sidebar.css';
+@import '/a/css/10-footer.css';
+
+/* Tables */
+@import '/a/css/11-tables.css';
+
+/* Forms and system responce */
+@import '/a/css/12-forms.css';
+@import '/a/css/13-buttons.css';
+@import '/a/css/14-alerts.css';
+
+/* Widgets */
+@import '/a/css/15-wdg-01-paginator.css';
+@import '/a/css/15-wdg-02-sharing.css';
+@import '/a/css/15-wdg-03-collapsibles.css';
+@import '/a/css/15-wdg-04-tabs.css';
+@import '/a/css/15-wdg-05-gallery-slideshow-carousel.css';
+@import '/a/css/15-wdg-06-modal.css';
+@import '/a/css/15-wdg-07-tooltip.css';
+
+/* Customization */
+@import '/a/css/16-cstm-01-front.css';
+@import '/a/css/16-cstm-02-inner.css';
+@import '/a/css/16-cstm-03-blog.css';
+@import '/a/css/16-cstm-04-legacy.css';
+
+/* Utility classes */
+@import '/a/css/17-helpers.css';
+
+/* Print */
+@import '/a/css/18-print.css';

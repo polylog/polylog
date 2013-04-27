@@ -1,0 +1,155 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+TABLE {
+    background: @c-tbl;
+    border: @brd;
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    text-align: left;
+    margin: 0 auto @baseline;
+    table-layout: auto;
+    width: 100%;
+    *width: 97%;
+
+    .col, .col-1of6, .col-1of4, .col-1of3, .col-1of2, .col-2of3, .col-3of4 {
+        display: table-cell;
+        float: none;
+        margin-left: 0; }
+    }
+
+CAPTION {
+    font-weight: bold;
+    text-align: left;
+    margin-top: 0;
+    padding: .75em 0; }
+
+THEAD, TABLE > TR:first-child, TR:hover TD, TR:hover TH { background: @c-th; }
+
+TR:nth-child(even) { background: @c-tr; }
+
+TD, TH {
+    border-right: @brd;
+    border-bottom: @brd;
+    font-size: 100%;
+    font-weight: normal;
+    vertical-align: top;
+    padding: 11px 9px 12px; }
+
+TABLE > TR:last-child TH, TABLE > TR:last-child TD, TBODY TR:last-child TH, TBODY TR:last-child TD { padding-bottom: 11px; }
+
+/*
+|-------------------------------------------------------------------------------
+| TABLETS & DESKTOPS
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (min-width: 768px) {
+
+/* Rounded corners */
+TABLE {
+    border-collapse: separate; /* Done so we can round those corners */
+    *border-collapse: collapse; /* IE7 can't round corners anyway */
+    .border-radius(@brd-radius); }
+
+TABLE > TR:last-child TH, TABLE > TR:last-child TD, TBODY TR:last-child TH, TBODY TR:last-child TD { border-bottom: 0; }
+
+TH:last-child, TD:last-child { border-right: 0; }
+
+TABLE > TR:first-child TH:first-child, TABLE > TR:first-child TD:first-child,
+THEAD TR:first-child TH:first-child, THEAD TR:first-child TD:first-child {
+    .border-radius((@brd-radius - 1) 0 0 0); }
+
+TABLE > TR:first-child TH:last-child, TABLE > TR:first-child TD:last-child,
+THEAD TR:first-child TH:last-child, THEAD TR:first-child TD:last-child {
+    .border-radius(0 (@brd-radius - 1) 0 0); }
+
+TABLE > TR:last-child TH:first-child, TABLE > TR:last-child TD:first-child,
+TBODY TR:last-child TH:first-child, TBODY TR:last-child TD:first-child {
+    .border-radius(0 0 0 (@brd-radius - 1)); }
+
+TABLE > TR:last-child TH:last-child, TABLE > TR:last-child TD:last-child,
+TBODY TR:last-child TH:last-child, TBODY TR:last-child TD:last-child {
+    .border-radius(0 0 (@brd-radius - 1) 0); }
+
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+TABLE { margin: 0 auto @baseline-mob; }
+
+CAPTION { padding: .625em 20px; }
+
+/*
+|---------------------------------------
+| Responsive tables
+|---------------------------------------
+|
+| Inspired by by http://dbushell.com/
+|
+*/
+
+TABLE, THEAD {
+    *zoom: 1;
+
+    &:before, &:after {
+        content: '';
+        display: table;
+        line-height: 0; }
+
+    &:after { clear: both; }
+}
+
+TABLE {
+    border: 0;
+    display: block;
+    position: relative;
+    *zoom: 1; }
+
+CAPTION {
+    .box-sizing(border-box);
+    .text-overflow;
+    max-width: 75%; }
+
+THEAD {
+    display: block;
+    float: left;
+    max-width: 36%;
+
+    TR, TH {
+        display: block;
+        .text-overflow;
+        max-width: 100%; }
+    }
+
+TBODY {
+    display: block;
+    white-space: nowrap;
+    position: relative;
+    overflow-x: auto;
+    width: auto;
+    *zoom: 1;
+
+    TR {
+        display: inline-block;
+        margin-left: -.26em; }
+    }
+
+TD, TH {
+    border-right: 0;
+    margin: 0;
+    padding: 9px 9px 10px !important;
+
+    &:first-child { border-top: @brd; }
+    }
+
+TD { display: block; }
+}

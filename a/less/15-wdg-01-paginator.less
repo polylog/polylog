@@ -1,0 +1,90 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+/*
+<div class="paginator cfx">
+<a href="/ru/pr-blog" class="pager-first active" title="На предыдущую страницу">предыдущая страница</a>
+<span class="pager-list">
+<a href="/ru/pr-blog" class="pager-first active" title="На страницу номер 1">1</a>
+<strong class="pager-current">2</strong>
+<a href="/ru/pr-blog?page=2" class="pager-next active" title="На страницу номер 3">3</a>
+<a href="/ru/pr-blog?page=3" class="pager-next active" title="На страницу номер 4">4</a>
+<a href="/ru/pr-blog?page=4" class="pager-next active" title="На страницу номер 5">5</a>
+<a href="/ru/pr-blog?page=5" class="pager-next active" title="На страницу номер 6">6</a>
+<span class="pager-ellipsis">…</span>
+</span>
+<a href="/ru/pr-blog?page=2" class="pager-next active" title="На следующую страницу">следующая страница</a>
+</div>
+*/
+
+.paginator {
+    white-space: nowrap;
+    margin: 38em/@b 0 8em/@b; } /* 38px 0 8px */
+
+    .paginator A, .pager-current, .pager-ellipsis {
+        display: block;
+        border: @brd;
+        border-left-width: 0;
+        float: left;
+        line-height: 42px;
+        text-decoration: none;
+        padding: 0 17px;
+        height: 42px; }
+
+.paginator A:hover, .pager-current { background: @c-tr; }
+
+.pager-current {
+    color: @c-txt;
+    cursor: default; }
+
+/* First Last Pages */
+.pager-list :first-child {
+    border-left: @brd;
+}
+
+/* Prev-Next buttons */
+.paginator > A:first-of-type, .paginator > A:last-of-type {
+    text-indent: -4000em;
+    position: relative; }
+
+.paginator > A:first-of-type { .pseudo-before(); }
+.paginator > A:last-of-type { .pseudo-after(); }
+
+.paginator > A:first-of-type:before, .paginator > A:first-of-type .before, .paginator > A:last-of-type:after, .paginator > A:last-of-type .after {
+    text-indent: 0;
+    position: absolute;
+    top: 0;
+    left: 40%;
+    width: 1em; }
+
+.paginator > A:first-of-type:before, .paginator > A:first-of-type .before { content: '\00ab'; }
+
+.paginator > A:last-of-type:after, .paginator > A:last-of-type A .after {
+    background: @bg;
+    content: '\00bb';
+    z-index: 2; }
+
+.paginator > A:last-of-type:hover:after, .paginator > A:last-of-type:hover A .after {
+    background: @c-tr; }
+
+.paginator > A:first-of-type {
+    border-right: 0;
+    border-left-width: 1px;
+    .border-radius(3px 0 0 3px); }
+
+.paginator > A:last-of-type {
+    border-right: @brd;
+    border-left: 0;
+    .border-radius(0 3px 3px 0); }
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+.paginator { margin: 28em/@bm 0 26em/@bm; } /* 28px 0 26px */
+.pager-ellipsis { display: none; }
+}

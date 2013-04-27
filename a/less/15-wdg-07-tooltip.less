@@ -1,0 +1,43 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+/* Use 'position: relative; *zoom: 1;' for parents of .dfn */
+
+.tooltip {
+    background: #e5f3ff;
+    .box-shadow(0 1px 3px rgba(0,0,0,0.16));
+    color: @c-txt;
+    display: none;
+    text-align: left;
+    margin: 0;
+    padding: 20px;
+    position: absolute;
+    bottom: 1.5 * @baseline;
+    left: 0;
+    width: 180px;
+    z-index: @z-tooltip;
+
+    &:after { /* Caret body */
+        border-bottom: 11px solid transparent;
+        border-left: 11px solid #e5f3ff;
+        content: '';
+        display: inline-block;
+        position: absolute;
+        bottom: -11px;
+        left: 40px; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+    .post-link H1, .post-video H1, .post-audio H1 { line-height: @baseline-mob; }
+    .tooltip {
+        display: none;
+        visibility: hidden;
+        height: 0; }
+}

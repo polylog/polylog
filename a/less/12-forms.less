@@ -1,0 +1,609 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+FORM {
+    margin: 0 0 @baseline;
+    padding: 0;
+
+    I.co {
+        display: none; /* Hide validation icons */
+        height: ;
+        width: ; }
+}
+
+/*
+|---------------------------------------
+| Containers
+|---------------------------------------
+*/
+
+FIELDSET {
+    border: 0;
+    margin: @baseline 0 0;
+    padding: 0;
+    position: relative;
+    *zoom: 1; }
+
+    .group + FIELDSET, FIELDSET + FIELDSET { margin-top: (@baseline * 7/4); } /* Margin-top equals two baselines minus quoter (7/4) since we set 1/4 margin-bottom on label */
+
+    H1 + FIELDSET, P + FIELDSET { margin-top: 0; }
+
+    LEGEND {
+        border: 0;
+        display: block;
+        font: @h2-font-weight @h2-font-size e('/')@h2-line-height @h2-font; /* Escape function */
+        text-align: left;
+        margin: 0;
+        *margin-left: -7px;
+        padding: (@h2-line-height - 3em/@h2) 0 (@h2-line-height + 3em/@h2); /* Spacing for labeled fieldset. Large font fine-tuning - cut from top padding but add to bottom padding */
+        white-space: normal;
+        width: 100%; }
+
+FORM .group {
+    position: relative;
+    *zoom: 1; }
+
+    LEGEND + .group {
+        /* margin-top: @baseline;
+        -webkit-margin-top-collapse: separate; */ }
+
+/*
+|---------------------------------------
+| Buttons container
+|---------------------------------------
+*/
+
+.f-actions {
+    margin-top: @baseline;
+    margin-bottom: @baseline;
+    padding: @baseline 0;
+
+    *zoom: 1;
+
+    &:before, &:after {
+        content: '';
+        display: table;
+        line-height: 0; }
+
+    &:after { clear: both; }
+}
+
+/*
+|---------------------------------------
+| Labels and placeholders
+|---------------------------------------
+*/
+
+LABEL {
+    cursor: pointer;
+    display: block;
+    margin: 5/4*@baseline 0 @baseline/4;
+
+    B {
+        display: inline; /* Show labels text on big screens */
+        font-weight: normal; }
+    }
+
+    LABEL.first, FORM > LABEL:first-child, FORM > .group:first-child LABEL, LEGEND + LABEL { margin-top: 0 ; }
+    .help + LABEL, .with-tip + LABEL, .with-tip + .group LABEL { margin-top: @baseline; }
+
+/* We have to use few rules, because browsers ignore a rule with an unknown selector. */
+:-moz-placeholder { color: @c-input; } /* Placeholder isn't supported in Firefox 3.6 */
+:-ms-input-placeholder { color: @c-input; }
+::-webkit-input-placeholder { color: @c-input; }
+
+/*
+|---------------------------------------
+| Text inputs and textareas
+|---------------------------------------
+*/
+
+/*INPUT[type="text"], - die6 */
+INPUT.txt, /*.i-uneditable, */ SELECT, TEXTAREA {
+    background: @c-input;
+    border: @brd;
+    .border-radius(@brd-radius);
+    .box-sizing(border-box);
+    display: inline-block;
+    font-family: inherit;
+    margin: 0;
+    vertical-align: baseline;
+    *vertical-align: middle;
+    width: 100%;
+}
+
+/*INPUT[type="text"], - die6 */
+INPUT.txt, .txt INPUT, TEXTAREA {
+    font-weight: bold;
+    padding: (@baseline/4 - 1em/@b) 7px;
+    outline: none; }
+
+INPUT, TEXTAREA {
+    .box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
+    .transition(~'border linear .2s, box-shadow linear .2s');
+
+     /* Focus state */
+    &:focus {
+        border-color: darken(@c-brd, 24%);
+        outline: 0;
+        outline: thin dotted \9; /* IE6-9 */
+        .box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)); }
+    }
+
+TEXTAREA { resize: vertical; }
+
+/*
+|---------------------------------------
+| Checkboxes, radiobuttons,
+| input-images and input-files
+|---------------------------------------
+*/
+
+.cbx, .rb { /* Labels-containers */
+    .box-sizing(border-box);
+    padding-left: @baseline;
+    position: relative;
+    width: 100%;
+    *zoom: 1; }
+
+.cbx, .rb, .with-cbx-rb {
+    + .cbx, + .rb, + .with-cbx-rb .cbx, + .with-cbx-rb .rb { margin-top: @baseline; }
+}
+
+INPUT[type="checkbox"], INPUT[type="image"], INPUT[type="radio"] {
+    cursor: pointer;
+    *width: 13px;
+    *height: 13px; }
+
+/* .rb INPUT[type="radio"], .cbx INPUT[type="checkbox"], - die6 */
+.rb INPUT, .cbx INPUT {
+    position: absolute;
+    top: 2em/@b;
+    left: 0; }
+
+INPUT[type="radio"] { vertical-align: text-bottom; }
+
+/* FORM > DIV > .cbx:first-child, FORM > DIV > .rb:first-child { padding-top: 5px; } */
+
+.rb.inline, .cbx.inline {
+    display: inline-block;
+    margin-top: @baseline + 3em/@b; /* Fine-tuning */
+    vertical-align: middle;
+    width: auto; }
+
+.cbx.inline + .cbx.inline, .rb.inline + .rb.inline { margin-left: 10px; }
+
+INPUT[type="image"] {
+    .box-shadow(none);
+    border: 0; }
+
+INPUT[type="file"] {
+    background: initial;
+    border: initial;
+    .box-shadow(none);
+    padding: initial;
+    height: 28px;
+    width: auto; }
+
+/*
+|---------------------------------------
+| Select
+|---------------------------------------
+|
+| There are background, border,
+| display, margin and vertical-align
+| rules in the INPUTs section
+|
+*/
+
+SELECT {
+    background: @c-input;
+    line-height: 28px;
+    *margin-top: 4em/@b; /* For IE6/7 add top margin to align SELECT with LABELs */
+    padding: 5px;
+    height: 28px; /* In IE7, the height of the SELECT element cannot be changed by height, only font-size */
+    width: 240px; }
+
+SELECT[multiple], SELECT[size] { height: auto; }
+
+/*
+|---------------------------------------
+| Slide out
+|---------------------------------------
+*/
+
+.img-captcha {
+    float: left;
+    margin: 0 20px 0 0;
+    height: 30px; }
+
+#i-captcha {
+    float: left;
+    width: 44%; }
+
+
+/*
+|---------------------------------------
+| Layout
+|---------------------------------------
+|
+| labels-on-left (.f-lol)
+| and inline forms
+|
+*/
+
+/* Grouping */
+
+.f-lol { /* Labels on left */
+    .group {
+        margin-bottom: @baseline;
+        *zoom: 1;
+
+        &:before, &:after {
+            content: '';
+            display: table;
+            line-height: 0; }
+
+        &:after { clear: both; }
+
+        DIV {
+            *display: inline-block;
+            margin-left: @i-width + 20;
+            *margin-left: 0;
+            *padding-left: 20px;
+
+            &:first-child { *padding-left: @i-width + 20; }
+            }
+        }
+
+    LABEL {
+        float: left;
+        text-align: right;
+        margin-top: 0;
+        padding-top: 13em/@b; /* Top border + top padding of input */
+        width: @i-width; }
+
+    .f-actions { padding-left: @i-width + 20; }
+}
+
+/* Inputs and labels */
+
+.f-inline LABEL { display: inline-block; }
+
+.f-lol, .f-inline {
+INPUT, TEXTAREA, SELECT, .help
+/*, .i-uneditable, .i-append, .i-prepend */ {
+    .inline-block;
+    margin-bottom: 0; }
+
+    /* Re-hide hidden elements */
+    .hide { display: none; }
+}
+
+
+.f-inline .cbx, .f-inline .rb {
+    margin-bottom: 0;
+    vertical-align: middle; }
+
+/* .f-inline .cbx INPUT[type="checkbox"], .f-inline .rb INPUT[type="radio"] - die6 */
+.f-inline .cbx INPUT, .f-inline .rb INPUT  {
+    float: left;
+    margin-right: 3px;
+    margin-left: 0; }
+
+/*
+|---------------------------------------
+| Non text and textarea inputs states
+|---------------------------------------
+*/
+
+
+INPUT[type="file"]:focus, INPUT[type="radio"]:focus, INPUT[type="checkbox"]:focus, SELECT:focus {
+    .box-shadow(none);
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px; }
+
+INPUT[disabled], SELECT[disabled], TEXTAREA[disabled], INPUT[readonly], SELECT[readonly], TEXTAREA[readonly] {
+    background-color: #e7eaee;
+    border-color: lighten(@c-brd, 50%);
+    cursor: default;
+    cursor: not-allowed; }
+
+INPUT[type="radio"][disabled], INPUT[type="checkbox"][disabled], INPUT[type="radio"][readonly],
+INPUT[type="checkbox"][readonly] { background-color: transparent; }
+
+INPUT[type="hidden"] { display: none; }
+
+/*
+|---------------------------------------
+| Alerts
+|---------------------------------------
+*/
+
+/* Messages */
+
+.sys-message {
+    position: absolute;
+    top: 1/2 * @baseline;
+    right: -340px; /* Width + padding */
+    width: 320px;
+
+    P {
+        background: @bg;
+        color: @c-nt;
+        display: none;
+        padding: @baseline 20px @baseline 40px;
+        position: relative;
+        *zoom: 1;
+
+        &.active { display: block }
+
+        &:before {
+            /* Main sprite */
+            content: '';
+            .ir;
+            position: absolute;
+            top: @baseline + 2em/@b; /* Fine-tuning */
+            left: 10px;
+            height: 20px;
+            width: 20px; }
+        }
+
+    .checking:before { /* TODO: create spinner gif */ }
+
+    .error { /* TODO: check selectors compability with old browsers */
+        color: @warning-txt;
+
+        &:before { background-position: -230px 0; }
+    }
+
+    .success {
+        color: @success-txt;
+
+        &:before { background-position: -290px 0; }
+    }
+
+    .tip:before { background-position: -260px 0; }
+}
+
+/* Inputs emphasis */
+.success {
+    >  LABEL, .cbx, INPUT, .rb, SELECT, TEXTAREA { color: @success-txt; }
+
+    INPUT, SELECT, TEXTAREA {
+        border-color: @success-brd;
+        .box-shadow(inset 0 1px 1px rgba(0,0,0,.075)); /*  Redeclare so transitions work */
+
+        &:focus {
+            border-color: darken(@success-brd, 10%);
+            .box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten(@success-brd, 20%)); }
+    }
+
+    /* Give a small background color for input-prepend/-append */
+    .input-prepend .add-on, .input-append .add-on {
+        background-color: @success-bg;
+        border-color: @success-brd;
+        color: @success-txt; }
+
+    :valid + I.co {
+        background-position: -260px 0;
+        display: block; }
+
+    /* Webfont variant. Icon font can be configured and downloaded from http://icomoon.io/app/ */
+    /* :valid + I.co {
+        content: '&#xe000';
+        color: green; } */
+}
+
+.error {
+    >  LABEL, .cbx, INPUT, .rb, SELECT, TEXTAREA { color: @warning-txt; }
+
+    INPUT, SELECT, TEXTAREA {
+        border-color: @warning-brd;
+        .box-shadow(inset 0 1px 1px rgba(0,0,0,.075)); /*  Redeclare so transitions work */
+
+        &:focus {
+            border-color: darken(@warning-brd, 10%);
+            .box-shadow(inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten(@warning-brd, 20%)); }
+    }
+
+    /* Give a small background color for input-prepend/-append */
+    .input-prepend .add-on, .input-append .add-on {
+        background-color: @warning-bg;
+        border-color: @warning-brd;
+        color: @warning-txt; }
+}
+
+INPUT:invalid, TEXTAREA:invalid { background: @warning-bg; } /* HTML5 invalid states. Shares styles with the .warning */
+
+INPUT:focus:required:invalid, SELECT:focus:required:invalid, TEXTAREA:focus:required:invalid {
+    border-color: @warning-brd;
+    color: @warning-txt;
+
+    &:focus { border-color: lighten(@warning-brd, 20%); }
+}
+
+/* 2+ mixins cause fatal node.js errors in the LESS.app or CodeKit compilation   */
+/*
+.error .help-block,  .error .help, .error INPUT,
+    .error .i-append .add-on, .error .i-prepend .add-on,
+.error > LABEL, .error SELECT, .error TEXTAREA   {
+    color: @error-txt; }
+
+.error INPUT, .warning .i-append .add-on, .warning .i-prepend .add-on, .error SELECT, .error TEXTAREA {
+    background: @error-bg;
+    border-color: @error-brd; }
+
+.error INPUT:focus, .error SELECT:focus, .error TEXTAREA:focus {
+    border-color: lighten(@error-brd, 20%); }
+*/
+
+/*
+|---------------------------------------
+| Help
+|---------------------------------------
+*/
+
+
+.help {
+    color: @c-nt;
+    display: block;
+    margin: @baseline/4 0; }
+
+/*
+|---------------------------------------
+| Grid
+|---------------------------------------
+*/
+
+
+/* INPUT[class*="col"], SELECT[class*="col"], TEXTAREA[class*="col"], .i-uneditable[class*="col"],
+.row INPUT[class*="col"], .row SELECT[class*="col"], .row TEXTAREA[class*="col"], .row .i-uneditable[class*="col"] - die6 */
+
+FORM, INPUT, SELECT, TEXTAREA/*, .i-uneditable */ {
+    &.col, &.col-1of6, &.col-1of4, &.col-1of3, &.col-1of2,
+    &.col-2of3, &.col-3of4 {
+        float: none;
+        margin-left: 0; }
+    }
+
+FORM {
+    &.col, &.col-1of6, &.col-1of4, &.col-1of3, &.col-1of2,
+    &.col-2of3, &.col-3of4 {
+        padding: 0; }
+    }
+
+/*
+|-------------------------------------------------------------------------------
+| DESKTOPS: 980px and up
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (min-width: 980px) {
+.sys-message {
+    right: -440px; /* Width + padding */
+    width: 420px; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+LEGEND { margin-bottom: @baseline-mob; }
+
+/* Buttons container ---------------- */
+
+.f-actions {
+    margin-top: @baseline-mob;
+    margin-bottom: @baseline-mob;
+    padding: @baseline-mob 0;
+    *zoom: 1; }
+
+/* Labels and placeholders ---------- */
+
+LABEL, .help + LABEL {
+    display: none; /* Hide label text marked as bold and use placeholder attribute instead. */
+    margin: 0;
+    display: inline \9;
+
+    B { display: inline; }
+    }
+
+:-moz-placeholder { color: @c-nt; }
+:focus:-moz-placeholder {
+    color: lighten(@c-nt, 20%);
+    -moz-transition: background-position 0.1s linear; }
+
+:-ms-input-placeholder { color: @c-nt; }
+:focus:-ms-input-placeholder {
+    color: lighten(@c-nt, 20%);
+    -ms-transition: background-position 0.1s linear; }
+
+::-webkit-input-placeholder { color: @c-nt; }
+:focus::-webkit-input-placeholder {
+    color: lighten(@c-nt, 20%);
+    -webkit-transition: color 0.1s linear; }
+
+
+/* Text inputs and textareas -------- */
+
+INPUT.txt, /*.i-uneditable, */ SELECT, TEXTAREA, .txt INPUT {
+    margin: @baseline-mob/4 0;
+    padding: (@baseline-mob/2 - 1em/@bm) 7px; }
+
+INPUT.txt, .txt INPUT, TEXTAREA { font-weight: normal; }
+
+/* Checkboxes, radiobuttons, input-images nad input-files ------------------- */
+
+.rb, .cbx {
+    display: block;
+
+    + .cbx, + .rb { margin-top: @baseline-mob; }
+}
+
+.rb INPUT[type="radio"], .cbx INPUT[type="checkbox"], .rb INPUT, .cbx INPUT { top: -1em/@bm; }
+
+
+/* Capthca -------------------------- */
+
+.img-captcha, #i-captcha { float: none; }
+
+.img-captcha { margin-top: @baseline-mob; }
+
+#i-captcha {
+    margin: 10em/@bm 0 0;
+    width: 100%; }
+
+/* Layout: labels-on-left and inline forms ---------------------------------- */
+.f-lol .group { margin-bottom: 18em/@bm; }
+
+.f-lol LABEL {
+    float: left;
+    padding-top: 0; }
+
+.f-lol .group DIV {
+    *display: inline-block;
+    margin-left: 0;
+    *padding-left: 0; }
+
+.f-lol .group DIV:first-child { *padding-left: 0; }
+
+.f-lol .f-actions { padding-left: 0; }
+
+.f-inline INPUT, .f-lol INPUT,
+.f-inline TEXTAREA, .f-lol TEXTAREA,
+.f-inline SELECT, .f-lol SELECT,
+.f-inline .help, .f-lol .help
+/*, .f-inline .i-uneditable, .f-lol .i-uneditable,
+.f-inline .i-append, .f-lol .i-append,
+.f-inline .i-prepend, .f-lol .i-prepend */ {
+    display: block;
+    margin-bottom: initial; }
+
+.f-inline .cbx, .f-inline .rb { margin-bottom: initial; }
+
+/* .f-inline .cbx INPUT[type="checkbox"], .f-inline .rb INPUT[type="radio"] - die6 */
+.f-inline .cbx INPUT, .f-inline .rb INPUT  {
+    float: none;
+    margin-right: 0;
+    margin-left: initial; }
+
+/* Help ----------------------------- */
+.help { margin: @baseline-mob/4 0; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| PORTRAIT PHONES
+|-------------------------------------------------------------------------------
+*/
+@media only screen and (max-width: 479px) {
+
+
+}

@@ -3,7 +3,6 @@ _notes/
 a/css/*
 !a/css/styles.css
 a/img/_tmp/
-a/less/*
 
 # Auxiliary Files
 *.sublime-*

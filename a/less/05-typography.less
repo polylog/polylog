@@ -1,0 +1,210 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+:focus { outline: none; }
+
+/*
+|---------------------------------------
+| Links
+|---------------------------------------
+*/
+
+A {
+    color: @c-link;
+    text-decoration: none;
+
+    &:visited { color: @c-link-visited; }
+
+    &:hover {
+    color: @c-link-hover;
+    text-decoration: underline; }
+
+    &:link { -webkit-tap-highlight-color: transparent; }
+
+    EM { font-style: normal; }
+}
+
+H1 A, H1 A:visited { color: @h1-color; }
+H2 A, H2 A:visited { color: @h2-color; }
+
+.a-cta {
+    display: block;
+    .pseudo-after;
+
+    &:after, .after {
+        background-position: 0 -110px;
+        content: '';
+        .ir(0, inline-block);
+        margin-left: .24em;
+        height: 7px;
+        width: 6px; }
+     }
+
+
+/*
+|---------------------------------------
+| Typography
+|---------------------------------------
+*/
+
+/* Defaults */
+BODY {
+    font-size: 100% * @b / 16;
+    line-height: @baseline;
+    -webkit-font-smoothing: antialiased; }
+
+BODY, BUTTON, INPUT, LABEL, SELECT, TEXTAREA {
+    color: @c-txt;
+    font-family: @font-sans; }
+
+/* Details */
+ADDRESS {
+    display: block;
+    font-style: normal;
+    margin-bottom: @baseline; }
+
+B, STRONG { font-weight: bold; }
+
+.byline, FIGCAPTION, /* .help-block, */ .help, .note, TIME { color: @c-nt; }
+
+.byline { margin-bottom: 0; }
+
+H1, H2, H3, H4 {
+    margin: 0;
+    text-rendering: optimizelegibility;
+
+    SMALL {
+        font-size: 100%;
+        font-weight: normal; }
+    }
+
+H1 {
+    color: @h1-color;
+    font: @h1-font-weight @h1-font-size @h1-font;
+    letter-spacing: -.04em;
+    line-height: @h1-line-height; /* Shortcut rule causes bugs in old IEs */
+    padding-top: 29em/@h1; // 31em/@h1 for Roboto
+    padding-bottom: 20em/@h1; } // 21em/@h1  for Roboto
+
+    H1 B, H1 EM, H2 B, H2 EM {
+        font-family: @h-bold;
+        font-style: normal;
+        font-weight: @h-bold-weight; }
+
+    H1 + P:not([class]), .ahd + P:not([class]), HGROUP + P:not([class]),
+    .doc-main > HEADER + P:not([class]), .doc-body > HEADER + P:not([class]),
+    P.lead {
+        color: #000; }
+
+    HEADER H1 {
+        padding-bottom: 0;
+
+        + DL, + H2, +OL, + P, + UL { margin-top: -3em/@b ;} /* Large size fonts fine-tuning */
+    }
+
+    H1.h2 {
+        font: @h2-font-weight @h2-font-size @h2-font;
+        letter-spacing: -.05em;
+        line-height: @h2-line-height; /* Shortcut rule causes bugs in old IEs */
+        padding-top: 22em/@h2; /* 20px */
+        padding-bottom: 3em/@h2; /* 4px */
+    }
+
+H2 {
+    font: @h2-font-weight @h2-font-size @h2-font;
+    letter-spacing: -.04em; //-.05em for Roboto
+    line-height: @h2-line-height; /* Shortcut rule causes bugs in old IEs */
+    padding-top: 22em/@h2; /* 20px */
+    padding-bottom: 3em/@h2; /* 4px */ }
+
+    H1 + H2, HGROUP H2, .deck { /* A smaller headline running below the main headline; also called a drop head */
+        padding-top: 0; }
+
+    H2.media-caption { margin-bottom: @baseline/2; }
+    H2 + IMG { margin-top: @baseline/2; }
+
+
+H3, .h3, H4, .h4 {
+    font: bold 100% @font-sans;
+
+    + IMG { margin-top: @baseline/2;}
+}
+
+H3.media-caption { margin-bottom: @baseline; }
+
+H4, .h4 {
+    color: #83868a; }
+
+HEADER, HGROUP {
+    position: relative;
+    *zoom: 1; }
+
+HGROUP, .doc-main > HEADER, .doc-body > HEADER, P  { margin: 0 0 @baseline; }
+
+.hp { margin-left: -.5em; }
+
+HR {
+    border: 0;
+    border-top: @brd;
+    clear: both;
+    display: block;
+    margin: (7/4 * @baseline - 1/@b) 0 (9/4 * @baseline - 1/@b); /* 4 (16/4) empty lines */
+    padding: 0;
+    height: 1px; }
+
+SMALL, .small {
+    font-size: @small / @b * 100%;
+    line-height: 2 / 3 * @bl / @small + 0em; /* 2/3 baseline — every third line fit to grid */ }
+
+    .small { margin-bottom: 2 / 3 * @bl / @small + 0em; }
+
+::-moz-selection {
+    background: @c-selection;
+    color: #FFF;
+    text-shadow: none; }
+
+::selection {
+    background: @c-selection;
+    color: #FFF;
+    text-shadow: none; }
+
+.inline { display: inline; }
+.nowrap { white-space: nowrap; }
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+BODY {
+    font-size: 100% * @bm / 16;
+    line-height: @baseline-mob; }
+
+ADDRESS, HGROUP, .doc-main > HEADER, .doc-body > HEADER, P, PRE { margin-bottom: @baseline-mob; }
+
+/*H1, H2, H3, H4, .doc-main HEADER SMALL, .doc-body HEADER SMALL, P {
+    padding-right: 20px;
+    padding-left: 20px; }*/
+
+H1 {
+    font: @h1-font-weight-mob @h1-font-size-mob e('/')@h1-line-height-mob @h1-font-mob; /* Escape function */
+    padding-top: 32em/@h1m;
+    padding-bottom: 18em/@h1m; }
+
+    HEADER H1 {
+        + DL, + H2, +OL, + P, + UL { margin-top: @baseline-mob/2 - 2em/@bm; } /* Adding some space for decks and large size fonts fine-tuning */
+        }
+
+H2 {
+    font-size: @h2-font-size-mob;
+    line-height: @h2-line-height-mob;
+    padding-top: 18em/@h2m; /* 18px */
+    padding-bottom: 2em/@h2m; /* 2px */ }
+
+HR { margin: (7/4 * @baseline-mob - 1/@bm) 0 (9/4 * @baseline-mob - 1/@bm); }  /* 4 (16/4) empty lines */
+
+}

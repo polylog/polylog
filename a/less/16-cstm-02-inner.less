@@ -1,0 +1,177 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+/* Article header */
+.doc-body .ahd {
+    border-bottom: @brd;
+    color: @c-nt;
+    margin-bottom: 28em / @b; // Roboto — 27em / @b
+    padding-bottom: 14em / @b;
+
+H1 { padding-bottom: 44em / @h1; } // Roboto — 42em / @h1;
+
+    UL {
+        font-size: @small / @b * 100%;
+        line-height: @bl / @small + 0em;
+        list-style: none;
+        list-style-image: none;
+        margin: 0;
+        padding: 0; }
+
+    UL UL { font-size: 100%; }
+}
+
+.ahd-back, .ahd-date, .ahd-author, .ahd-tags { float: left; }
+
+.ahd-back {
+    margin-right: 1em;
+    position: relative;
+    *zoom: 1;
+
+    I.co {
+        background-position: 0 -130px;
+        position: absolute;
+        top: 8em/@small;
+        left: -10px;
+        height: 7px;
+        width: 7px; }
+}
+
+.ahd-date I {
+    // border: @brd;
+    // border-top: 4px solid #c33;
+    // .border-radius(2px);
+    // line-height: 19px;
+    // padding: 0 .2em;
+    background: transparent url(/a/img/dtl-calendar.gif) no-repeat;
+    .inline-block;
+    font-style: normal;
+    text-align: center;
+    margin-left: .2em;
+    height: 19px;
+    width: 21px;
+}
+
+.ahd-author {
+    padding-left: 72px;
+    position: relative;
+    *zoom: 1;
+
+    IMG {
+        margin: 0;
+        position: absolute;
+        bottom: -14em / @small;
+        left: 0;
+        max-height: 60px;
+        max-width: none;
+        width: auto; }
+}
+
+/* News archive */
+.ahd-archive { float: right; }
+
+.ahd-archive .ahd-years, .ahd-year, .ahd-archive .body-menu,
+.ahd-archive-index .ahd-years, .ahd-year, .ahd-archive-index .body-menu
+{ .inline-block; }
+
+.ahd-archive UL, .ahd-archive-index UL { padding-left: 4px;}
+
+.ahd-year {
+    *border-right: @brd;
+    padding-right: 4px;
+
+    &:after {
+        content: '\2219';
+        margin-left: 5px; }
+}
+
+.ahd-year:nth-child(4) {
+    padding-right: 0;
+    &:after { content: ''; }
+}
+
+.ahd-archive .hdr-dropdown, .ahd-archive-index .hdr-dropdown {
+    padding: 12px 1px;
+    width: auto; }
+
+.ahd-back A:visited, .ahd-archive A:visited, .ahd-archive-index A:visited { color: @c-link; }
+
+/* / article header */
+
+// Author
+.byline {
+    color: @c-nt;
+    font-size: @small / @b * 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    IMG {
+        margin: 0;
+        position: absolute;
+        bottom: -14em / @small;
+        left: 0;
+        max-height: 60px;
+        max-width: none;
+        width: auto; }
+}
+
+.doc-body {
+    > DL, > OL, > P, > UL, > .backgrounder {
+        .box-sizing(border-box);
+        width: @doc-main/@content-box * 100%; }
+}
+
+.doc-body .bicol { width: 100%; }
+
+/*
+|---------------------------------------
+| High resolution devices
+|---------------------------------------
+*/
+ @media print,
+        (-o-min-device-pixel-ratio: 5/4),
+        (-webkit-min-device-pixel-ratio: 1.25),
+        (min-resolution: 120dpi) {
+
+.ahd-date I {
+    background: transparent url(/a/img/dtl-calendar-x2.gif) no-repeat;
+    .background-size(21px 19px); }
+
+}
+
+
+/*
+|-------------------------------------------------------------------------------
+| PORTRAIT TABLETS: 768–979px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (min-width: 768px) and (max-width: 979px) {
+
+.doc-body {
+> DL, > OL, > P, > UL { width: 100%; }
+}
+
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+    .ahd-back, .ahd-author, .ahd-year, .ahd-archive-label { display: none; }
+
+    .doc-body {
+    > DL, > OL, > P, > UL { width: 100%; }
+    }
+
+    H1 {
+        padding-top: 24em/@h1m;
+        padding-bottom: 26em/@h1m; }
+
+}

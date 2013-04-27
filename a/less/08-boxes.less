@@ -1,0 +1,272 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+ASIDE.left, ASIDE.right {
+    .box-sizing(border-box);
+    width: 33.3333333%; /* 1/3 of body width - 320 in 960px layout */
+
+    ADDRESS, BLOCKQUOTE, DL, OL, UL, FIELDSET, PRE, P {
+        &:last-child { margin-bottom: 0; }
+        }
+
+    }
+
+    .doc-main ASIDE.left, .doc-main ASIDE.right, .doc-body > ASIDE.left, .doc-body > ASIDE.right { width: 44.44%; /* Still 1/3 of body width */ }
+
+    ASIDE.left { margin: 0 20px @baseline 0; }
+
+    ASIDE.right { margin: 0 0 @baseline 20px; }
+
+
+BLOCKQUOTE {
+    background: @c-tr;
+    margin: 0 0 @baseline;
+    padding: @baseline 20px @baseline 40px;
+
+    P {
+        padding: 0;
+        .pseudo-before;
+        position: relative;
+        *zoom: 1;
+
+        &:before, &.before {
+            content: '\00ab';
+            font-size: 27/@b * 100%;
+            position: absolute;
+            top: -2em/27;
+            left: -.5em;}
+    }
+
+    P:last-of-type:not(.byline) { margin-bottom: 0; }
+
+    P:last-of-type:not(.byline):after { content: '\00bb'; }
+
+    FOOTER {
+        color: @c-nt;
+        .pseudo-before; }
+
+    FOOTER:before, FOOTER .before { content: '\2014 \00A0'; }
+    }
+
+/*
+|---------------------------------------
+| General boxes
+|---------------------------------------
+*/
+
+.box, .box-menu,
+.backgrounder, .pull_quote, .quote /* Legacy boxes */ {
+    background: @c-tr;
+    border: @brd;
+    .border-radius(4px);
+    .box-shadow(0 2px 2px rgba(0,0,0,.06));
+    margin-top: -1/2*@baseline;
+    margin-bottom: @baseline;
+    padding-bottom: @baseline - 1em/@b;
+
+    HEADER, H2, .box-heading {
+        #gradient > .vertical-three-colors(#f1f4f8, #e0e3e7, 84%, #e7eaee);
+        border-bottom: 1px solid #cfd2d6;
+        .border-radius(3px 3px 0 0);
+        .box-shadow(inset 0 1px 0 rgba(255,255,255,.4), 0 1px 0 rgba(255,255,255,.8));
+        text-shadow: 0 1px 0 rgba(255,255,255,.8);
+        font-weight: 400;
+        margin-bottom: 1/2*@baseline;
+        padding: (1/2*@baseline + 1/@b) 19px (1/2*@baseline - 3/@b); }
+
+    H2, HEADER H3 {
+        font-size: 100%;
+        font-weight: 400;
+
+        A {
+            color: @c-txt;
+            display: block;
+            padding: 0 25px 0 0;
+            .pseudo-after;
+            position: relative;
+            *zoom: 1;
+
+            &:after, .after {
+                background-position: -60px -110px;
+                content: '';
+                .ir;
+                margin-top: -7px;
+                position: absolute;
+                top: 50%;
+                right: 0;
+                height: 15px;
+                width: 15px; }
+        }
+    }
+}
+
+.box {
+    DL, OL, P, UL { padding-right: 19px; }
+    OL { padding-left: 39px; }
+    DL, P, UL { padding-left: 19px; }
+    UL {  *padding-left: 39px; }
+}
+
+.jumped {
+    /*
+    A story requiring a "jump," or continuation, to another page should be split in midsentence,
+    never at a period of a paragraph. For example, "(Continued on page , col. ) will direct the reader adequately.
+    The jumped portion should carry a brief head, or key word, taken from the main head to identify it as a continuation.
+    The "jump head" should be keyed to the same type style and face, although it seldom will be in the same type size,
+    as the original headline. Never jump a story on a hyphenated word, or carry over the last line of a paragraph.
+    */ }
+
+.tsr {
+    /*
+    Teaser - An eye-catching graphic element or small chunk of text on Page One or section fronts,
+    that promotes an item inside; also called a promo.
+    */
+    margin-bottom: @baseline; }
+
+.coverline {
+    /*
+    Small teaser - graphic element or headline. Set in 2-columns smartphone layout.
+    */ }
+
+/* ---------------------------*/
+
+DIV:focus { outline: none; }
+
+IFRAME {
+    border: 0 none;
+    margin-bottom: @baseline;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-width: 100%; }
+
+#cse-search-results, #cse-search-results IFRAME { width: 100%; }
+#cse-search-results IFRAME {
+    min-height: 1187em/@b;
+    *height: 1187em/@b; }
+
+/* Special and legacy boxes */
+.sec-feature {
+    background: #fff;
+    float: left;
+    margin: 0 40px @baseline 0;
+    width: 240px;
+
+    .more {
+        display: block;
+        padding: 0 19px; }
+
+}
+
+ASIDE.quote {
+    H3 { padding: 0 19px; }
+    IMG.right { margin-right: 19px; }
+    IMG.left { margin-left: 19px; }
+}
+
+.infobox {
+    background: @c-tr;
+    border: @brd;
+    .border-radius(4px);
+    .box-shadow(0 2px 2px rgba(0,0,0,.06));
+    margin-bottom: @baseline;
+    padding: 19px 19px @baseline - 1em/@b; }
+
+/* Clients */
+.sec-clients { background: #fff !important; }
+
+.sec-clients UL, .case_studies {
+        list-style: none;
+        list-style-image: none;
+        margin: 0;
+
+    LI {
+        float: left;
+        text-align: center;
+        margin-top: 1em;
+        width: 50%;
+        *width: 49%; }
+ }
+
+.sec-clients UL { padding: 4px 0 0 !important; }
+.case_studies { padding: 4px 9px 0; }
+
+.sec-clients LI A, .case_studies A, .sec-clients LI SPAN,
+#beeline, #cln_beeline SPAN, #cln_mpf SPAN,
+#cln_borjomi SPAN, #lukoil, #rus_bel, #sangtuda {
+    .ir;
+    margin: 0 auto;
+    height: 80px;
+    width: 80px; }
+
+    /* On the front */
+    #cln-unesco { background-position: 0 0;}
+    #cln-apec { background-position: -100px 0;}
+    #cln-mitsubishi { background-position: -200px 0;}
+    #cln-microsoft { background-position: -300px 0;}
+    #cln-philips, #philips { background-position: 0 -100px;}
+    #cln-logitech, #logitech { background-position: -100px -100px;}
+    #cln-sandoz, #sandoz { background-position: -200px -100px;}
+    #cln-samsung, #samsung { background-position: -300px -100px;}
+
+    /* On the inners */
+    #cln-beeline, #beeline, #cln_beeline SPAN { background-position: -300px -200px;}
+    #cln-gazprom { background-position: -100px -400px;}
+    #cln-mpf, #cln_mpf SPAN { background-position: -100px -200px;}
+    #cln-borjomi, #cln_borjomi SPAN { background-position: -200px -200px;}
+    #cln-lukoil, #lukoil { background-position: 0 -300px;}
+    #cln-bel, #rus_bel { background-position: -200px -300px;}
+    #cln-sangtuda, #sangtuda { background-position: -100px -300px;}
+
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+@media only screen and (max-width: 767px) {
+
+ASIDE.left, ASIDE.right {
+    margin: 0 0 2*@baseline-mob;
+    max-width: none;
+    width: auto !important; }
+
+.box {
+    background: @c-tr;
+    margin-top: @baseline-mob - 1em/@bm !important;
+    margin-bottom: @baseline-mob;
+    padding-bottom: @baseline-mob - 1em/@bm;
+    max-width: 50%;
+    width: auto !important;
+
+    HEADER, >H2 {
+        margin-bottom: 1/2*@baseline-mob;
+        padding: (1/2*@baseline-mob + 1/@b) 19px (1/2*@baseline-mob - 3/@b); }
+    }
+
+.tsr { margin-bottom: @baseline-mob; }
+
+BLOCKQUOTE {
+    margin: 0 0 @baseline-mob;
+    padding: @baseline-mob 20px; }
+
+.box, BLOCKQUOTE, .jumped, .tsr, .coverline {
+    UL {
+        padding-left: 20px;
+
+        UL { padding-right: 40px}
+        }
+    }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| PORTRAIT PHONES: up to 480px
+|-------------------------------------------------------------------------------
+*/
+@media only screen and (max-width: 480px) {
+
+
+.box { max-width: none; }
+}

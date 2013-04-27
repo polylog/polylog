@@ -396,12 +396,15 @@
     RewriteRule ^ru/marketing-communications-pr-btl/index.htm$ http://www.polylog.ru/ru/services/index.htm [R=301,L]
     RewriteRule ^en/marketing-communications-pr-btl/integrated-public-relations-campaigns.htm$ http://www.polylog.ru/en/services/public-relations.htm [R=301,L]
     RewriteRule ^ru/marketing-communications-pr-btl/integrated-public-relations-campaigns.htm$ http://www.polylog.ru/ru/services/public-relations.htm [R=301,L]
-    RewriteRule ^en/marketing-communications-pr-btl/government-authority-consulting.htm$ http://www.polylog.ru/en/services/government-authority-consulting.htm [R=301,L]
-    RewriteRule ^ru/marketing-communications-pr-btl/government-authority-consulting.htm$ http://www.polylog.ru/ru/services/government-authority-consulting.htm [R=301,L]
     RewriteRule ^en/marketing-communications-pr-btl/gr-government-relations.htm$ http://www.polylog.ru/en/services/gr-government-relations.htm [R=301,L]
     RewriteRule ^ru/marketing-communications-pr-btl/gr-government-relations.htm$ http://www.polylog.ru/ru/services/gr-government-relations.htm [R=301,L]
     RewriteRule ^en/marketing-communications-pr-btl/public-relations-event-planning.htm$ http://www.polylog.ru/en/services/event-management.htm [R=301,L]
     RewriteRule ^ru/marketing-communications-pr-btl/public-relations-event-planning.htm$ http://www.polylog.ru/ru/services/event-management.htm [R=301,L]
+
+    RewriteRule ^en/marketing-communications-pr-btl/government-authority-consulting.htm$ http://www.polylog.ru/en/services/regional-development.htm [R=301,L]
+    RewriteRule ^ru/marketing-communications-pr-btl/government-authority-consulting.htm$ http://www.polylog.ru/ru/services/regional-development.htm [R=301,L]
+    RewriteRule ^en/services/government-authority-consulting.htm$ http://www.polylog.ru/en/services/regional-development.htm [R=301,L]
+    RewriteRule ^ru/services/government-authority-consulting.htm$ http://www.polylog.ru/ru/services/regional-development.htm [R=301,L]
 
     RewriteRule ^en/btl-pr-clients/index.htm$ http://www.polylog.ru/en/clients/index.htm [R=301,L]
     RewriteRule ^ru/btl-pr-clients/index.htm$ http://www.polylog.ru/ru/clients/index.htm [R=301,L]

@@ -1,0 +1,173 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+@sidebar:                       185;
+@c-badge:                       #c9ccd0;
+
+.doc-sidebar {
+    float: right;
+    padding-top: 39em/@b;
+    width: @sidebar + 0px; // He fixed width, because of the already narrow
+
+    .box, .box-menu { margin: 0 0 @baseline; }
+
+    .box-body, .tab-content {
+        font-size: @small / @b * 100%;
+        line-height: 2 / 3 * @bl / @small + 0em; /* 2/3 baseline — every third line fir to grid */}
+
+    // What's next box
+    .sec-cta {
+        .box-heading { margin-bottom: 0; }
+
+        .bnr {
+            #gradient > .vertical-three-colors(#66C, #66c, 56%, #99f);
+            margin-bottom: 14em/@small;
+            position: relative;
+            height: 95px;
+            *zoom: 1; }
+
+        FIGURE {
+            margin-bottom: 0;
+            position: absolute;
+            bottom: 0;
+            right: 0; }
+
+        P { margin-bottom: 9em/@small;}
+
+        .btn-email {
+            display: block;
+            text-align: left;
+            margin: 0 19px 21em/@small;
+
+        &:before, .before { margin-top: -13px; }
+        }
+
+        .ln-tel {
+            margin-left: 19px;
+            padding-left: 34px;
+            position: relative;
+            *zoom: 1;
+
+            I.co {
+                background-position: -30px -210px;
+                position: absolute;
+                left: 10px;
+                top: -3em/@small;
+                height: 21px;
+                width: 19px; }
+        }
+    } // End: What's next box
+}
+
+/*
+|---------------------------------------
+| Menus
+|---------------------------------------
+*/
+.box-menu, .box .tab-content {
+    UL {
+        margin: -2em/12 0 0;
+        padding: 0 2px; }
+
+    LI {
+        background-image: url(/a/img/b.gif);
+        background-repeat:  no-repeat;
+        background-position: -2px 7em/@small;
+        .border-radius(3px);
+        margin-bottom: 1px;
+        padding-left: 6px;
+
+        &:hover {
+            background-color: @c-th;
+            text-decoration: none;
+            .transition(background 0.2s linear); }
+    }
+
+    A {
+        .box-sizing(border-box);
+        color: @c-link;
+        display: block;
+        padding: 9px 10px;
+        width: 100%;
+
+        &:hover, &:focus { text-decoration: none; }
+    }
+}
+
+.lbl-tag A { background-position: -170px -100px; }
+.lbl-archive A { background-position: -210px -100px; }
+
+/* Blog tags */
+.tab-tag {
+    LI {
+        position: relative;
+        *zoom: 1; }
+
+    A { padding-right: 50px !important; }
+
+    SPAN { // Badge
+        background: @c-badge;
+        .border-radius(3px);
+        color: #FFF;
+        display: block;
+        text-align: center;
+        padding: 2px 4px;
+        position: absolute;
+        top: 7em/@small;
+        right: 8px;
+        min-width: 15px;
+        *width: 15px; }
+}
+
+/* Monthly archive */
+
+.tab-archive {
+    LI A {
+        display: inline-block !important;
+        *display: inline !important;
+        width: auto !important;
+        *zoom: 1; }
+
+        .a-more { padding-left: 19px; }
+}
+
+/*
+|---------------------------------------
+| High resolution devices
+|---------------------------------------
+*/
+
+ @media print,
+        (-o-min-device-pixel-ratio: 5/4),
+        (-webkit-min-device-pixel-ratio: 1.25),
+        (min-resolution: 120dpi) {
+
+    .doc-sidebar .sec-cta FIGURE {
+        background: transparent url(/a/img/yury-cta-x2.png) no-repeat;
+        .background-size(100% 100%); }
+
+        .doc-sidebar .sec-cta IMG { visibility: hidden; }
+}
+/*
+|-------------------------------------------------------------------------------
+| PHONES AND TABLETS: up to 979px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 979px) {
+    .doc-sidebar { display: none; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+.doc-sidebar {
+    float: none;
+    width: 100%; }
+}

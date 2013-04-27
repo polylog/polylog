@@ -1,0 +1,387 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+.doc-header {
+    margin: 0 0 1.5*@baseline;
+    padding: 49px 60px 0;
+    overflow: visible;
+    height: 94px;
+    z-index: 2;
+    *zoom: 1;
+
+      &:before, &:after {
+        content: '';
+        display: table;
+        line-height: 0; }
+
+      &:after { clear: both; }
+
+    HGROUP { margin-bottom: 12em / @b;}
+
+    H1 {
+        float: left;
+        padding: 12px 23px 0 0;
+        height: 33px;
+        width: 132px;
+
+        A {
+            /* Main sprite */
+            background-position: -60px 0;
+            .ir;
+            height: 33px;
+            width: 132px; }
+    }
+
+    H2 {
+        border-left: @brd;
+        color: @c-nt;
+        float: left;
+        font-size: @small / @b * 100%;
+        font-family: @font-sans;
+        font-weight: normal;
+        line-height: normal;
+        padding: 16px 0 7px 18px;
+        width: 241px; }
+
+    A, A:hover {
+        text-decoration: none;
+        display: block; }
+}
+
+.p-front .doc-header H1 A { cursor: default; }
+.hdr-hgroup-en H1 A { background-position: 0 -320px; }
+.hdr-hgroup-en H2 { padding-top: 28px; }
+
+/* Phone and language switcher */
+.sec-london-calling {
+    position: absolute;
+    top: 61px;
+    right: 60px;
+
+    LI { float: right; }
+
+    .tel, .tel:hover {
+        color: #8d9094;
+        font: @h1-font-weight-mob @h3sharp-font-size @h1-font-mob;
+        letter-spacing: -.1em;
+        text-rendering: optimizelegibility;
+        padding: 8px 0 0 49px;
+        position: relative;
+        *zoom: 1;
+
+        B {
+            font-family: @h1-font;
+            font-weight: 500; }
+
+        .co {
+            background-position: -230px -60px;
+            .ir;
+            position: absolute;
+            top: 7px;
+            left: 0;
+            height: 25px;
+            width: 41px; }
+    }
+
+    .lang {
+        #gradient > .vertical(#f4f7fb, #edf0f4);
+        border: @brd;
+        .border-radius(3px);
+        .box-shadow(inset 0 1px 0 rgba(255,255,255,.4));
+        color: #c9ccd0;
+        display: block;
+        font-size: @small / @b * 100%;
+        text-align: center;
+        margin-left: 16px;
+        padding-top: 11px;
+        height: 20px;
+        width: 31px;
+
+        &:hover {
+            color: @c-nt;
+            .transition(color 0.1s linear); }
+    }
+}
+
+/*
+|---------------------------------------
+| Main menu
+|---------------------------------------
+*/
+
+.doc-header {
+
+    .nav {
+        display: table;
+        *display: block;
+        float: left;
+        margin-left: -18px;
+        position: relative;
+        width: 429px;
+        z-index: 2;
+        *zoom: 1;
+        }
+
+    .mm-menu {
+        display: block;
+        float: left;
+        margin: 0 1px 0 0;
+        z-index: 4; }
+
+    .mm-community { margin-right: 0; }
+
+        .mm-label {
+            border: 1px solid transparent;
+            color: @c-mm-link;
+            white-space: nowrap;
+            padding: 5px 9px 4px 17px; }
+
+        /* Hovered nav items */
+        .mm-menu:hover .mm-label, .mm-label:focus, .mm-menu .down {
+            background: #f1f4f8;
+            border: @brd;
+            .border-radius(3px);
+            text-shadow: 0 1px 0 rgba(255,255,255,1); }
+
+        /* Active nav items */
+        .active .mm-label, .mm-label:active {
+            background: #e7eaee !important;
+            .box-shadow(inset 0 2px 4px rgba(0,0,0,.12));
+            padding: 6px 9px 3px 17px; }
+}
+
+/* Current sections buttons */
+.p-services .mm-services .mm-label,
+.p-clients .mm-clients .mm-label,
+.p-company .mm-company .mm-label,
+.p-community .mm-community .mm-label {
+    background: #f1f4f8;
+    border: @brd;
+    .border-radius(3px);
+    text-shadow: 0 1px 0 rgba(255,255,255,1);
+
+    &:hover { background: #eaedf1;}
+
+}
+
+/* There is the dropdown menu in the next file  */
+
+/*
+|---------------------------------------
+| Search
+|---------------------------------------
+*/
+
+.doc-header FORM { /* Separate desktop and mobile version search forms here */
+    margin-bottom: 0;
+    *zoom: 1;
+
+    &:before, &:after {
+        content: '';
+        display: table;
+        line-height: 0; }
+
+    &:after { clear: both; }
+
+    BUTTON, INPUT, SELECT {
+        display: inline-block;
+        margin-bottom: 0; }
+
+    INPUT[type="checkbox"] { margin-top: 3px; }
+}
+
+.f-search {
+    .box-sizing(border-box);
+    border: @brd;
+    .border-radius(3px);
+    .box-shadow(inset 0 2px 2px rgba(0,0,0,.06));
+    float: right;
+    padding: 3px 40px 3px 1px;
+    position: relative;
+    width: 410 / 860 * 100%;
+    *zoom: 1;
+
+    BUTTON {
+        /* Main sprite */
+        background-position: -162px -62px;
+        .reset-filter();
+        .ir;
+        border: 0;
+        .border-radius(0);
+        .box-shadow(none);
+        display: block;
+        margin: 0;
+        padding: 0;
+        .opacity(76); /* Mute button in on-state */
+        position: absolute;
+        top: 3px;
+        right: 1px;
+        height: 28px;
+        width: 28px;
+
+        &:hover {
+            background-position: -192px -62px; /* Reset position changing in general BUTTON:hover rule */
+            background-color: transparent; /* Reset rule setting in general BUTTON rule */
+            .opacity(100); /* Bright up it */
+            .transition(opacity 0.1s linear); }
+    }
+}
+
+.i-search/*, INPUT[type="search"] */ {
+    background: @c-input;
+    border: 1px solid #FFF !important;
+    /* Hide Google watermark and
+    escape !important to prevent compile errors */
+    .box-shadow(inset 0 30px 0 @c-input ~'!important');
+    .box-sizing(border-box);
+    line-height: 25px;
+    margin: 0;
+    padding: 0 0 0 16px;
+    vertical-align: baseline;
+    *vertical-align: middle;
+    height: 25px;
+    width: 100%; }
+
+/* Normalizing — Reset for custom background and border */
+INPUT[type="search"] { -webkit-appearance: textfield; }
+/* Removes inner padding and search cancel button in Safari 5 and Chrome on OS X. */
+/* INPUT[type="search"]::-webkit-search-cancel-button,
+INPUT[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none; } */
+
+.i-search:-moz-placeholder { color: #c9ccd0; } /* Placeholder isn't supported in Firefox 3.6 */
+.i-search:focus:-moz-placeholder {
+    color: #fff;
+    -moz-transition: background-position 0.2s linear; }
+
+.i-search:-ms-input-placeholder { color: #c9ccd0; }
+.i-search:focus:-ms-input-placeholder {
+    color: #fff;
+    -ms-transition: background-position 0.2s linear; }
+
+.i-search::-webkit-input-placeholder { color: #c9ccd0; }
+.i-search:focus::-webkit-input-placeholder {
+    color: #fff;
+    -webkit-transition: color 0.2s linear; }
+
+/*
+|-------------------------------------------------------------------------------
+| PORTRAIT TABLETS: 768–979px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (min-width: 768px) and (max-width: 979px) {
+
+    .doc-header { padding: 49px 38px 0; }
+
+    .f-search { width: 264 / 692 * 100%; }
+
+    .sec-london-calling { right: 38px; }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+.doc-header {
+    background:  url(/a/img/bg.png) no-repeat 40% 0;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 4px 0 0;
+    position: fixed;
+    right: 0;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    z-index: 444;
+    *zoom: 1;
+
+    NAV {
+        #gradient > .vertical-three-colors(#f1f4f8, #e0e3e7, 82%, #e7eaee);
+        border-bottom: 1px solid #cfd2d6;
+        .box-shadow(0 1px 2px rgba(0,0,0,.12));
+        float: none;
+        padding: 0;
+        height: 39px;
+        width: auto; }
+
+    H1 {
+        float: none;
+        line-height: 1;
+        margin: 0 auto;
+        padding: 12px 0 0;
+        height: 17px;
+        width: 145px;
+
+        A {
+            background-position: -210px 0;
+            line-height: @baseline-mob;
+            height: 17px;
+            width: 145px; }
+    }
+}
+
+.en .doc-header H1 {
+    background-position: -210px -30px;
+    width: 137px;
+}
+
+
+/* Search --------------------------- */
+
+.f-search BUTTON { display: none; }
+
+/* Search — Hide for SMS novel. Remove it after implementation */
+
+.f-search { display: none; }
+
+/*
+|---------------------------------------
+| Slide out
+|---------------------------------------
+*/
+
+#slide-out {
+    background: #eef1f5;
+    .box-sizing(border-box);
+    .box-shadow(inset -2px 0 4px rgba(0,0,0,.12));
+    padding: 4px 10px 0;
+    .fixed-on-top;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+    height: 100%;
+    width: @so-width;
+
+    LI A {
+        color: @c-so-link;
+        border-bottom: 1px dotted #c5c8cc;
+        .box-sizing(border-box);
+        box-shadow: @c-so-brd-t;
+        display: block;
+        text-decoration: none;
+        text-shadow: 0 1px 1px rgba(255,255,255,1);
+        padding: 11px 10px 10px;
+        width: 100%;
+
+        &:visited { color: @c-so-link; }
+
+        &:hover, &:active, &.so-community {
+            background-color: @c-so-link-hover-light;
+            color: @c-so-link-hover; }
+    }
+
+    .so-community {
+        &:hover, &:active {
+            background-color: @c-so-link-hover-dark;
+        }
+    }
+}
+
+}

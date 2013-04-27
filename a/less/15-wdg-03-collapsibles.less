@@ -1,0 +1,38 @@
+@import '02-variables.less';
+@import '02-mixins.less';
+
+.on-demand, .on_demand {
+    list-style-image: none;
+    list-style-type: none;
+
+    H3 {
+        cursor: pointer;
+        position: relative;
+
+        I {
+            background-position: 0 -110px;
+            .ir;
+            position: absolute;
+            top: .385em;
+            left: -20px;
+            height: 7px;
+            width: 7px; }
+        }
+
+    DIV { display: none; }
+
+    .opened { display: block;
+        I { background-position: -40px -110px; }
+    }
+}
+
+/*
+|-------------------------------------------------------------------------------
+| !! BL SHIFT !!
+| PHONES & SMALL PORTRAIT TABLETS: up to 767px
+|-------------------------------------------------------------------------------
+*/
+
+@media only screen and (max-width: 767px) {
+
+}
